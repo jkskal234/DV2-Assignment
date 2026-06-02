@@ -1,0 +1,792 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Australia's Domestic Air Network (2024)",
+    "subtitle": "Top 40 domestic routes by passenger volume.",
+    "font": "DM Sans",
+    "fontSize": 22,
+    "fontWeight": "bold",
+    "color": "#f5f7fa",
+    "subtitleFont": "DM Sans",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#c8d8e8",
+    "anchor": "middle",
+    "offset": 12
+  },
+  "width": 820,
+  "height": 530,
+  "background": "#0d1b2e",
+  "padding": {
+    "left": 20,
+    "right": 220,
+    "top": 20,
+    "bottom": 20
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelColor": "#f5f7fa",
+      "titleColor": "#f5f7fa",
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "titleFontSize": 14,
+      "labelFontSize": 12,
+      "labelLimit": 400,
+      "symbolOpacity": 1,
+      "symbolStrokeColor": "#f5f7fa",
+      "symbolFillColor": "#f5f7fa"
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/vega/vega-datasets/main/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.id == 36"
+        }
+      ],
+      "projection": {
+        "type": "mercator",
+        "center": [
+          134,
+          -28.8
+        ],
+        "scale": 790
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#1a2e45",
+        "stroke": "#39526f",
+        "strokeWidth": 0.7
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "border": "WA Border",
+            "lon1": 129.0,
+            "lat1": -31.7,
+            "lon2": 129.0,
+            "lat2": -14.9
+          },
+          {
+            "border": "NT-SA",
+            "lon1": 129.0,
+            "lat1": -26.0,
+            "lon2": 138.0,
+            "lat2": -26.0
+          },
+          {
+            "border": "NT-QLD",
+            "lon1": 138.0,
+            "lat1": -26.0,
+            "lon2": 138.0,
+            "lat2": -16.5
+          },
+          {
+            "border": "SA-QLD",
+            "lon1": 138.0,
+            "lat1": -26.0,
+            "lon2": 141.0,
+            "lat2": -26.0
+          },
+          {
+            "border": "SA-NSW/VIC",
+            "lon1": 141.0,
+            "lat1": -38.05,
+            "lon2": 141.0,
+            "lat2": -26.0
+          },
+          {
+            "border": "QLD-NSW",
+            "lon1": 141.0,
+            "lat1": -29.0,
+            "lon2": 152.0,
+            "lat2": -29.0
+          }
+        ]
+      },
+      "projection": {
+        "type": "mercator",
+        "center": [
+          134,
+          -28.8
+        ],
+        "scale": 790
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#6f86a3",
+        "strokeWidth": 0.9,
+        "opacity": 0.6
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon1",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat1",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "lon2"
+        },
+        "latitude2": {
+          "field": "lat2"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "route": "Melbourne - Sydney",
+            "city1": "MEL",
+            "city2": "SYD",
+            "lon1": 144.837898,
+            "lat1": -37.670732,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 8039295,
+            "tier": "Major"
+          },
+          {
+            "route": "Brisbane - Sydney",
+            "city1": "BNE",
+            "city2": "SYD",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 4358325,
+            "tier": "Major"
+          },
+          {
+            "route": "Brisbane - Melbourne",
+            "city1": "BNE",
+            "city2": "MEL",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 3499263,
+            "tier": "Major"
+          },
+          {
+            "route": "Gold Coast - Sydney",
+            "city1": "OOL",
+            "city2": "SYD",
+            "lon1": 153.506641,
+            "lat1": -28.165962,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 2538036,
+            "tier": "Large"
+          },
+          {
+            "route": "Adelaide - Melbourne",
+            "city1": "ADL",
+            "city2": "MEL",
+            "lon1": 138.533393,
+            "lat1": -34.947512,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 2331114,
+            "tier": "Large"
+          },
+          {
+            "route": "Melbourne - Perth",
+            "city1": "MEL",
+            "city2": "PER",
+            "lon1": 144.837898,
+            "lat1": -37.670732,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 2030577,
+            "tier": "Large"
+          },
+          {
+            "route": "Gold Coast - Melbourne",
+            "city1": "MEL",
+            "city2": "OOL",
+            "lon1": 144.837898,
+            "lat1": -37.670732,
+            "lon2": 153.506641,
+            "lat2": -28.165962,
+            "passengers": 2012806,
+            "tier": "Large"
+          },
+          {
+            "route": "Adelaide - Sydney",
+            "city1": "ADL",
+            "city2": "SYD",
+            "lon1": 138.533393,
+            "lat1": -34.947512,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 1883796,
+            "tier": "Large"
+          },
+          {
+            "route": "Perth - Sydney",
+            "city1": "PER",
+            "city2": "SYD",
+            "lon1": 115.96700286865234,
+            "lat1": -31.94029998779297,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 1639356,
+            "tier": "Large"
+          },
+          {
+            "route": "Hobart - Melbourne",
+            "city1": "HBA",
+            "city2": "MEL",
+            "lon1": 147.513022,
+            "lat1": -42.837032,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 1373110,
+            "tier": "Large"
+          },
+          {
+            "route": "Brisbane - Cairns",
+            "city1": "BNE",
+            "city2": "CNS",
+            "lon1": 145.74948,
+            "lat1": -16.878921,
+            "lon2": 153.11700439453125,
+            "lat2": -27.38419914245605,
+            "passengers": 1305477,
+            "tier": "Large"
+          },
+          {
+            "route": "Brisbane - Perth",
+            "city1": "BNE",
+            "city2": "PER",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 1090947,
+            "tier": "Large"
+          },
+          {
+            "route": "Brisbane - Townsville",
+            "city1": "BNE",
+            "city2": "TSV",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 146.766512,
+            "lat2": -19.252904,
+            "passengers": 940794,
+            "tier": "Medium"
+          },
+          {
+            "route": "Cairns - Sydney",
+            "city1": "CNS",
+            "city2": "SYD",
+            "lon1": 145.74948,
+            "lat1": -16.878921,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 919237,
+            "tier": "Medium"
+          },
+          {
+            "route": "Canberra - Melbourne",
+            "city1": "CBR",
+            "city2": "MEL",
+            "lon1": 149.195007,
+            "lat1": -35.3069,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 917933,
+            "tier": "Medium"
+          },
+          {
+            "route": "Adelaide - Brisbane",
+            "city1": "ADL",
+            "city2": "BNE",
+            "lon1": 138.533393,
+            "lat1": -34.947512,
+            "lon2": 153.11700439453125,
+            "lat2": -27.38419914245605,
+            "passengers": 875326,
+            "tier": "Medium"
+          },
+          {
+            "route": "Cairns - Melbourne",
+            "city1": "CNS",
+            "city2": "MEL",
+            "lon1": 145.74948,
+            "lat1": -16.878921,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 824781,
+            "tier": "Medium"
+          },
+          {
+            "route": "Hobart - Sydney",
+            "city1": "HBA",
+            "city2": "SYD",
+            "lon1": 147.513022,
+            "lat1": -42.837032,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 804765,
+            "tier": "Medium"
+          },
+          {
+            "route": "Launceston - Melbourne",
+            "city1": "LST",
+            "city2": "MEL",
+            "lon1": 147.210785,
+            "lat1": -41.544935,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 787367,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Mackay",
+            "city1": "BNE",
+            "city2": "MKY",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 149.182588,
+            "lat2": -21.170816,
+            "passengers": 761293,
+            "tier": "Medium"
+          },
+          {
+            "route": "Sunshine Coast - Sydney",
+            "city1": "MCY",
+            "city2": "SYD",
+            "lon1": 153.08319,
+            "lat1": -26.593324,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 706811,
+            "tier": "Medium"
+          },
+          {
+            "route": "Adelaide - Perth",
+            "city1": "ADL",
+            "city2": "PER",
+            "lon1": 138.533393,
+            "lat1": -34.947512,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 697766,
+            "tier": "Medium"
+          },
+          {
+            "route": "Melbourne - Sunshine Coast",
+            "city1": "MCY",
+            "city2": "MEL",
+            "lon1": 153.08319,
+            "lat1": -26.593324,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 676735,
+            "tier": "Medium"
+          },
+          {
+            "route": "Canberra - Sydney",
+            "city1": "CBR",
+            "city2": "SYD",
+            "lon1": 149.195007,
+            "lat1": -35.3069,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 639541,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Canberra",
+            "city1": "BNE",
+            "city2": "CBR",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 149.195007,
+            "lat2": -35.3069,
+            "passengers": 638259,
+            "tier": "Medium"
+          },
+          {
+            "route": "Karratha - Perth",
+            "city1": "KTA",
+            "city2": "PER",
+            "lon1": 116.773002625,
+            "lat1": -20.712200164799995,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 608586,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Rockhampton",
+            "city1": "BNE",
+            "city2": "ROK",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 150.475359,
+            "lat2": -23.380019,
+            "passengers": 532178,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Newcastle",
+            "city1": "BNE",
+            "city2": "NTL",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 151.835025,
+            "lat2": -32.796114,
+            "passengers": 512511,
+            "tier": "Medium"
+          },
+          {
+            "route": "Perth - Port Hedland",
+            "city1": "PER",
+            "city2": "PHE",
+            "lon1": 115.96700286865234,
+            "lat1": -31.94029998779297,
+            "lon2": 118.629789,
+            "lat2": -20.382787,
+            "passengers": 475259,
+            "tier": "Medium"
+          },
+          {
+            "route": "Melbourne - Newcastle",
+            "city1": "MEL",
+            "city2": "NTL",
+            "lon1": 144.837898,
+            "lat1": -37.670732,
+            "lon2": 151.835025,
+            "lat2": -32.796114,
+            "passengers": 416206,
+            "tier": "Medium"
+          },
+          {
+            "route": "Newman - Perth",
+            "city1": "PER",
+            "city2": "ZNE",
+            "lon1": 115.96700286865234,
+            "lat1": -31.94029998779297,
+            "lon2": 119.803001404,
+            "lat2": -23.4178009033,
+            "passengers": 396746,
+            "tier": "Medium"
+          },
+          {
+            "route": "Kalgoorlie - Perth",
+            "city1": "KGI",
+            "city2": "PER",
+            "lon1": 121.464586,
+            "lat1": -30.791543,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 366931,
+            "tier": "Medium"
+          },
+          {
+            "route": "Broome - Perth",
+            "city1": "BME",
+            "city2": "PER",
+            "lon1": 122.2283,
+            "lat1": -17.949194,
+            "lon2": 115.96700286865234,
+            "lat2": -31.94029998779297,
+            "passengers": 355110,
+            "tier": "Medium"
+          },
+          {
+            "route": "Launceston - Sydney",
+            "city1": "LST",
+            "city2": "SYD",
+            "lon1": 147.210785,
+            "lat1": -41.544935,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 339668,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Darwin",
+            "city1": "BNE",
+            "city2": "DRW",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 130.88185,
+            "lat2": -12.41497,
+            "passengers": 327251,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Hobart",
+            "city1": "BNE",
+            "city2": "HBA",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 147.513022,
+            "lat2": -42.837032,
+            "passengers": 307032,
+            "tier": "Medium"
+          },
+          {
+            "route": "Darwin - Melbourne",
+            "city1": "DRW",
+            "city2": "MEL",
+            "lon1": 130.88185,
+            "lat1": -12.41497,
+            "lon2": 144.837898,
+            "lat2": -37.670732,
+            "passengers": 289261,
+            "tier": "Medium"
+          },
+          {
+            "route": "Adelaide - Gold Coast",
+            "city1": "ADL",
+            "city2": "OOL",
+            "lon1": 138.533393,
+            "lat1": -34.947512,
+            "lon2": 153.506641,
+            "lat2": -28.165962,
+            "passengers": 256918,
+            "tier": "Medium"
+          },
+          {
+            "route": "Brisbane - Proserpine",
+            "city1": "BNE",
+            "city2": "PPP",
+            "lon1": 153.11700439453125,
+            "lat1": -27.38419914245605,
+            "lon2": 148.553583,
+            "lat2": -20.494416,
+            "passengers": 254850,
+            "tier": "Medium"
+          },
+          {
+            "route": "Hamilton Island - Sydney",
+            "city1": "HTI",
+            "city2": "SYD",
+            "lon1": 148.95199585,
+            "lat1": -20.3581008911,
+            "lon2": 151.177002,
+            "lat2": -33.946098,
+            "passengers": 226115,
+            "tier": "Medium"
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "(datum.lon1 + datum.lon2) / 2",
+          "as": "mid_lon"
+        },
+        {
+          "calculate": "((datum.lat1 + datum.lat2) / 2) + min(max(abs(datum.lon2 - datum.lon1) * 0.18, 2.2), 7.0)",
+          "as": "mid_lat"
+        },
+        {
+          "calculate": "[datum.lon1, datum.mid_lon, datum.lon2]",
+          "as": "curve_lons"
+        },
+        {
+          "calculate": "[datum.lat1, datum.mid_lat, datum.lat2]",
+          "as": "curve_lats"
+        },
+        {
+          "calculate": "[1, 2, 3]",
+          "as": "curve_order"
+        },
+        {
+          "calculate": "datum.tier == 'Major' ? 'Major (3.5M\u20138.0M Passengers)' : datum.tier == 'Large' ? 'Large (1.1M\u20132.5M Passengers)' : 'Medium (0.2M\u20130.9M Passengers)'",
+          "as": "tierLabel"
+        },
+        {
+          "flatten": [
+            "curve_lons",
+            "curve_lats",
+            "curve_order"
+          ],
+          "as": [
+            "curve_lon",
+            "curve_lat",
+            "curve_pt"
+          ]
+        }
+      ],
+      "projection": {
+        "type": "mercator",
+        "center": [
+          134,
+          -28.8
+        ],
+        "scale": 790
+      },
+      "mark": {
+        "type": "line",
+        "interpolate": "basis",
+        "strokeCap": "round",
+        "strokeJoin": "round",
+        "strokeWidth": 2.3,
+        "opacity": 0.78
+      },
+      "encoding": {
+        "longitude": {
+          "field": "curve_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "curve_lat",
+          "type": "quantitative"
+        },
+        "detail": {
+          "field": "route"
+        },
+        "order": {
+          "field": "curve_pt",
+          "type": "ordinal"
+        },
+        "color": {
+          "field": "tierLabel",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Major (3.5M\u20138.0M Passengers)",
+              "Large (1.1M\u20132.5M Passengers)",
+              "Medium (0.2M\u20130.9M Passengers)"
+            ],
+            "range": [
+              "#e8b84b",
+              "#56c0b5",
+              "#5f86b3"
+            ]
+          },
+          "legend": {
+            "title": "Route Tier",
+            "orient": "right",
+            "symbolStrokeWidth": 3,
+            "labelColor": "#f5f7fa",
+            "titleColor": "#f5f7fa"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "route",
+            "title": "Route"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers (2024)",
+            "format": ","
+          },
+          {
+            "field": "tier",
+            "title": "Tier"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon1": 151.2,
+            "lat1": -33.9,
+            "lon2": 154.2,
+            "lat2": -25.2
+          }
+        ]
+      },
+      "projection": {
+        "type": "mercator",
+        "center": [
+          134,
+          -28.8
+        ],
+        "scale": 790
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#f5f7fa",
+        "strokeWidth": 1.4,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon1",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat1",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "lon2"
+        },
+        "latitude2": {
+          "field": "lat2"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 154.45,
+            "lat": -25.0,
+            "label": "Sydney\u2013Melbourne\u2013Brisbane\ntriangle dominates domestic\npassenger traffic."
+          }
+        ]
+      },
+      "projection": {
+        "type": "mercator",
+        "center": [
+          134,
+          -28.8
+        ],
+        "scale": 790
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "font": "DM Sans",
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "#f5f7fa",
+        "lineBreak": "\n",
+        "limit": 260,
+        "dx": 4,
+        "lineHeight": 16
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

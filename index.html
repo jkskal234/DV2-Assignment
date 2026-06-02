@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Australia's Domestic Skies — A Data Story</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    /* ── Reset & Variables ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0d1b2e;
+      --ink-mid:   #1a2e45;
+      --ink-pale:  #24384f;
+      --sky:       #56c0b5;
+      --gold:      #e8b84b;
+      --steel:     #5f86b3;
+      --fog:       #c8d8e8;
+      --snow:      #f5f7fa;
+      --text-body: #d7e3f1;
+      --text-dim:  #8dafc8;
+      --section-gap: 2.5rem;
+      --chart-radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--snow);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Grain overlay ───────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(86,192,181,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 70% at 20% 80%, rgba(95,134,179,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 10%, rgba(232,184,75,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* Animated flight path lines */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .flight-arc {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      animation: arcFloat 8s ease-in-out infinite;
+    }
+
+    .flight-arc:nth-child(1) {
+      width: 900px; height: 500px;
+      top: -100px; left: -200px;
+      border-top-color: rgba(86,192,181,0.15);
+      animation-delay: 0s;
+    }
+    .flight-arc:nth-child(2) {
+      width: 700px; height: 400px;
+      top: 20%; left: 30%;
+      border-bottom-color: rgba(232,184,75,0.10);
+      animation-delay: -3s;
+    }
+    .flight-arc:nth-child(3) {
+      width: 1100px; height: 300px;
+      bottom: 100px; right: -300px;
+      border-top-color: rgba(95,134,179,0.10);
+      animation-delay: -5s;
+    }
+
+    @keyframes arcFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-20px) rotate(1deg); opacity: 1; }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--sky);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sky);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--fog);
+      max-width: 620px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--snow);
+    }
+
+    .hero-stat-number span {
+      color: var(--sky);
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 0.3rem;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      animation: scrollBob 2s ease-in-out infinite;
+    }
+
+    .scroll-cue svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-dim);
+    }
+
+    @keyframes scrollBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Layout ───────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Chapters ─────────────────────────────────────────── */
+    .chapter {
+      padding: 2.5rem 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .chapter + .chapter {
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Full-width chapter */
+    .chapter-wide {
+      max-width: 1400px;
+    }
+
+    /* ── Chapter header ──────────────────────────────────── */
+    .chapter-label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .chapter-label-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(232,184,75,0.15);
+      border: 1px solid rgba(232,184,75,0.3);
+      font-size: 0.65rem;
+    }
+
+    .chapter h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    .chapter-intro {
+      font-size: 1.05rem;
+      color: var(--fog);
+      max-width: 760px;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ── Callout / Insight boxes ──────────────────────────── */
+    .insight-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .insight-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .insight-card:hover {
+      border-color: rgba(86,192,181,0.25);
+      background: rgba(86,192,181,0.04);
+    }
+
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--sky), transparent);
+    }
+
+    .insight-card.gold::before {
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .insight-card.steel::before {
+      background: linear-gradient(90deg, var(--steel), transparent);
+    }
+
+    .insight-value {
+      font-family: 'Fraunces', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--sky);
+      margin-bottom: 0.35rem;
+    }
+
+    .insight-card.gold .insight-value { color: var(--gold); }
+    .insight-card.steel .insight-value { color: var(--steel); }
+
+    .insight-label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--fog);
+    }
+
+    .insight-note {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+    }
+
+    /* ── Chart containers ─────────────────────────────────── */
+    .chart-wrap {
+      background: var(--ink-mid);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--chart-radius);
+      padding: 1.2rem 1rem;
+      margin-bottom: 0.6rem;
+      overflow-x: auto;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .chart-wrap:hover {
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    /* Side-by-side charts */
+    .chart-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1000px) {
+      .chart-pair { grid-template-columns: 1fr; }
+    }
+
+    /* Chart caption */
+    .chart-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* ── Divider ──────────────────────────────────────────── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(86,192,181,0.3), transparent);
+      margin: 1rem 0;
+    }
+
+    /* ── Pull quote ───────────────────────────────────────── */
+    .pull-quote {
+      border-left: 3px solid var(--sky);
+      padding: 0.8rem 1.5rem;
+      margin: 1.2rem 0;
+      background: rgba(86,192,181,0.04);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .pull-quote p {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--snow);
+      line-height: 1.5;
+    }
+
+    .pull-quote.gold {
+      border-left-color: var(--gold);
+      background: rgba(232,184,75,0.04);
+    }
+
+    /* ── Timeline badge ───────────────────────────────────── */
+    .timeline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(232,184,75,0.12);
+      border: 1px solid rgba(232,184,75,0.25);
+      border-radius: 100px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Section divider with label ──────────────────────── */
+    .section-rule {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+      max-width: 1200px;
+    }
+
+    .section-rule::before,
+    .section-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .section-rule-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    .footer-col h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-col p, .footer-col a {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover { color: var(--sky); }
+
+    .footer-bottom {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* ── Vega embed overrides ─────────────────────────────── */
+    .vega-embed { width: 100% !important; display: block !important; }
+    .vega-embed canvas, .vega-embed svg { display: block; max-width: 100%; }
+    .vega-embed .vega-actions { display: none !important; }
+    .chart-wrap > div { width: 100%; }
+    .chart-wrap { min-height: 160px; }
+
+    /* ── Prose text ───────────────────────────────────────── */
+    .prose {
+      font-size: 1.0rem;
+      color: var(--fog);
+      line-height: 1.85;
+      max-width: 760px;
+      font-weight: 300;
+    }
+
+    .prose + .prose { margin-top: 1rem; }
+
+    strong { color: var(--snow); font-weight: 600; }
+
+    /* ── Fade-in on scroll ───────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-stats { gap: 1.5rem; }
+      .chart-wrap { padding: 1rem 0.5rem; }
+      .chapter { padding: 3rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines">
+    <div class="flight-arc"></div>
+    <div class="flight-arc"></div>
+    <div class="flight-arc"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Australian Domestic Aviation · 2024 Data Story</div>
+    <h1>Australia's<br><em>Domestic Skies</em></h1>
+    <p class="hero-sub">How 60 million Australians took to the air in 2024 and what the data reveals about routes, reliability, and recovery.</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-number">60<span>M</span></div>
+        <div class="hero-stat-label">Passengers in 2025</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">75<span>%</span></div>
+        <div class="hero-stat-label">On-Time National Average</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">8<span>M</span></div>
+        <div class="hero-stat-label">Sydney–Melbourne Passengers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-number">40<span>yrs</span></div>
+        <div class="hero-stat-label">Of Data, 1984–2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════ CHAPTER 1 — NETWORK MAP ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">1</span>
+    The Network
+  </div>
+  <h2>Where Australia Flies</h2>
+  <p class="chapter-intro">Australia's vast geography shapes an aviation network unlike anywhere else. The eastern seaboard concentrates most traffic, while long transcontinental routes connect isolated cities. Below are the top 40 domestic routes by passenger volume in 2024.</p>
+
+  <div class="chart-wrap fade-in" id="chart1"></div>
+  <p class="chart-note">Source: BITRE Domestic Aviation Activity, 2024 · Routes scaled by passenger tier</p>
+
+  <div class="insight-row fade-in">
+    <div class="insight-card">
+      <div class="insight-value">40</div>
+      <div class="insight-label">Routes Shown</div>
+      <div class="insight-note">Connecting 28 airports across 6 states and territories</div>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-value">3</div>
+      <div class="insight-label">Major Route Tiers</div>
+      <div class="insight-note">Major (3.5M+), Large (1.1M–2.5M), Medium (0.2M–0.9M)</div>
+    </div>
+    <div class="insight-card steel">
+      <div class="insight-value">MEL</div>
+      <div class="insight-label">Most Connected Hub</div>
+      <div class="insight-note">Melbourne features in more top-40 routes than any other airport</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-value">SYD↔MEL</div>
+      <div class="insight-label">World's 3rd Busiest Route</div>
+      <div class="insight-note">8 million passengers flew this corridor in 2024</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Volume &amp; History</span></div>
+
+<!-- ═══════════════════════ CHAPTER 2 — ANNUAL PASSENGERS ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">2</span>
+    Four Decades of Growth
+  </div>
+  <h2>A Long Climb, a Sudden Fall,<br>and a Rapid Return</h2>
+  <p class="chapter-intro">Australia's domestic aviation sector grew almost uninterrupted for nearly four decades. The Ansett collapse of 2001–02 caused a brief dip. COVID-19 was in a different category entirely — passenger numbers fell by more than 68% in a single year. The recovery since has been remarkable.</p>
+
+  <div class="chart-wrap fade-in" id="chart2"></div>
+  <p class="chart-note">Source: BITRE Domestic Aviation Activity Annual Summary, 1984–2025</p>
+
+  <div class="pull-quote fade-in">
+    <p>"In 2020, Australia went from 61 million domestic passengers to under 20 million in a single year — the steepest aviation collapse in the country's history."</p>
+  </div>
+
+  <div class="chart-wrap fade-in" id="chart5"></div>
+  <p class="chart-note">Source: BITRE</p>
+
+  <p class="prose fade-in">The monthly heatmap reveals what the annual chart cannot: the rhythmic seasonality of Australian flying, peaking every July and October, interrupted by the pale void of 2020 and 2021. Load factors — how full planes actually were — cratered to as low as 28% in April 2020 as borders snapped shut overnight.</p>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Routes</span></div>
+
+<!-- ═══════════════════════ CHAPTER 3 — TOP 20 ROUTES ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">3</span>
+    The Routes
+  </div>
+  <h2>The Sydney–Melbourne Corridor<br>Carries the Nation</h2>
+  <p class="chapter-intro">The top 20 domestic routes in 2024 show just how dominant the eastern triangle is. The Melbourne–Sydney corridor alone carried nearly as many passengers as the next three routes combined. Intrastate Queensland routes — including Brisbane–Cairns and Brisbane–Townsville — fill out the lower rankings.</p>
+
+  <div class="chart-wrap fade-in" id="chart3"></div>
+  <p class="chart-note">Source: BITRE</p>
+
+  <div class="insight-row fade-in">
+    <div class="insight-card">
+      <div class="insight-value">8.0M</div>
+      <div class="insight-label">Melbourne–Sydney</div>
+      <div class="insight-note">Rank 1 — almost double the #2 route</div>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-value">17</div>
+      <div class="insight-label">Interstate Routes</div>
+      <div class="insight-note">Out of the top 20, crossing state borders</div>
+    </div>
+    <div class="insight-card steel">
+      <div class="insight-value">3</div>
+      <div class="insight-label">Intrastate Routes</div>
+      <div class="insight-note">All within Queensland — Australia's largest domestic market</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Airport Performance</span></div>
+
+<!-- ═══════════════════════ CHAPTER 4 — AIRPORT BUBBLES ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">4</span>
+    Airports
+  </div>
+  <h2>Bigger Isn't Always<br>Better on Time</h2>
+  <p class="chapter-intro">One of the most counterintuitive findings in Australian aviation data is that the largest airports are not the most punctual. Melbourne processes more domestic passengers than any other airport — yet its on-time departure rate sits below the national average. Adelaide, significantly smaller, punches well above its weight.</p>
+
+  <div class="chart-wrap fade-in" id="chart4"></div>
+  <p class="chart-note">Source: BITRE OTP 2024</p>
+
+  <div class="pull-quote gold fade-in">
+    <p>"Darwin recorded the lowest on-time departure rate of any major airport at just 59.9% — nearly 20 percentage points below Adelaide's 79.4%."</p>
+  </div>
+
+  <div class="chart-wrap fade-in" id="chart11"></div>
+  <p class="chart-note">Source: BITRE OTP 2024</p>
+
+  <p class="prose fade-in">The grouped bar chart shows that <strong>small airports can consistently outperform large ones</strong>. South Australia's small airports — particularly Port Lincoln — achieve some of the highest punctuality in the country. The Northern Territory, by contrast, struggles regardless of airport size, with Darwin dragging down the territory's average considerably.</p>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Punctuality</span></div>
+
+<!-- ═══════════════════════ CHAPTER 5 — AIRLINE PUNCTUALITY ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">5</span>
+    Punctuality
+  </div>
+  <h2>Every Airline Flew Less<br>Punctually in 2024</h2>
+  <p class="chapter-intro">Comparing 2019 pre-pandemic figures to 2024 data tells a sobering story for every carrier. Not a single major domestic airline matched its 2019 on-time departure record. The reasons include post-COVID staffing challenges, airspace congestion from recovering international traffic, and higher overall load factors compressing turnaround times.</p>
+
+  <div class="chart-wrap fade-in" id="chart6"></div>
+  <div class="chart-wrap fade-in" id="chart7"></div>
+  <p class="chart-note">Source: BITRE OTP 2019 &amp; 2024</p>
+
+  <div class="insight-row fade-in">
+    <div class="insight-card">
+      <div class="insight-value">−7.4</div>
+      <div class="insight-label">Virgin Australia</div>
+      <div class="insight-note">Largest drop of any carrier — from 81.3% to 73.9%</div>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-value">−1.5</div>
+      <div class="insight-label">Jetstar</div>
+      <div class="insight-note">Smallest drop — but started from the lowest 2019 base</div>
+    </div>
+    <div class="insight-card steel">
+      <div class="insight-value">75.4%</div>
+      <div class="insight-label">2024 National Average</div>
+      <div class="insight-note">Down from an estimated 80%+ in 2019</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Worst Routes</span></div>
+
+<!-- ═══════════════════════ CHAPTER 6 — DELAYED ROUTES ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">6</span>
+    Worst-Performing Routes
+  </div>
+  <h2>Regional and Leisure Routes<br>Carry the Most Delays</h2>
+  <p class="chapter-intro">The 20 worst-performing domestic routes in 2024 share a common profile: they are long-haul connections to leisure or regional destinations, often dependent on a single airline and disproportionately affected when aircraft are delayed elsewhere in the network. Darwin features four times in the bottom 20.</p>
+
+  <div class="chart-wrap fade-in" id="chart9"></div>
+  <p class="chart-note">Source: BITRE OTP 2024</p>
+
+  <div class="pull-quote fade-in">
+    <p>"Hamilton Island–Sydney had the worst on-time rate in the country at just 55% — meaning nearly half of all departures were late."</p>
+  </div>
+
+  <p class="prose fade-in">Routes connecting <strong>leisure destinations like Hamilton Island, Proserpine, and Broome</strong> consistently rank among the worst-performing. These routes often rely on aircraft rotated from other services, meaning a disruption anywhere in the chain cascades into delays. Darwin's geographic isolation and challenging operating conditions compound this effect.</p>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Load Factor</span></div>
+
+<!-- ═══════════════════════ CHAPTER 7 — SCATTER LOAD FACTOR ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">7</span>
+    Load Factors
+  </div>
+  <h2>How Full Are<br>Australia's Planes?</h2>
+  <p class="chapter-intro">A load factor compares how many passengers actually flew against how many seats were available. Routes closer to the diagonal line are flying at or near capacity. Across almost all routes, 2024 load factors were significantly higher than pre-pandemic years — a sign of lean scheduling and robust demand.</p>
+
+  <div class="chart-wrap fade-in" id="chart8"></div>
+  <p class="chart-note">Source: BITRE Domestic Activity 2024</p>
+
+  <p class="prose fade-in">Regional and leisure routes like <strong>Broome–Perth</strong> and <strong>Hamilton Island–Melbourne</strong> are flying at nearly 89% capacity — airlines have tightly matched supply to demand on these thinner routes. Major city-pair routes cluster in the 80–87% range, leaving little slack for disruptions.</p>
+</section>
+
+<div class="section-rule"><span class="section-rule-label">Recovery</span></div>
+
+<!-- ═══════════════════════ CHAPTER 8 — RECOVERY ═══════════════════════ -->
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">8</span>
+    Recovery
+  </div>
+  <h2>Which Routes Bounced Back<br>— and Which Did Not?</h2>
+  <p class="chapter-intro">Comparing 2024 passenger volumes to 2019 reveals that recovery has been highly uneven. Some regional mining and resource routes — particularly in Western Australia — have far exceeded their pre-pandemic volumes, driven by the resources boom. Business travel corridors, meanwhile, have struggled to return to 2019 levels as hybrid work reduces corporate flying.</p>
+
+  <div class="chart-wrap fade-in" id="chart10"></div>
+  <p class="chart-note">Source: BITRE Domestic Activity</p>
+
+  <div class="insight-row fade-in">
+    <div class="insight-card">
+      <div class="insight-value">+84%</div>
+      <div class="insight-label">Geraldton–Perth</div>
+      <div class="insight-note">Biggest recovery — resource sector demand boom in WA</div>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-value">+31%</div>
+      <div class="insight-label">Kalgoorlie–Perth</div>
+      <div class="insight-note">Mining corridor vastly outperforms 2019 levels</div>
+    </div>
+    <div class="insight-card steel">
+      <div class="insight-value">−100%</div>
+      <div class="insight-label">Armidale–Sydney</div>
+      <div class="insight-note">No 2024 passengers recorded — service has not resumed</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-value">−41%</div>
+      <div class="insight-label">Darwin–Melbourne</div>
+      <div class="insight-note">Major CBD corridor still significantly below 2019</div>
+    </div>
+  </div>
+
+  <p class="prose fade-in">The diverging chart tells two separate stories. <strong>Western Australian resource routes</strong> have been supercharged by the mining sector's post-pandemic expansion. <strong>Traditional business travel routes</strong> — particularly those serving Canberra, Darwin, and remote NSW — reflect the structural shift toward remote work. Some may never return to 2019 volumes.</p>
+</section>
+
+<!-- ═══════════════════════ CONCLUSION ═══════════════════════ -->
+<div class="section-rule"><span class="section-rule-label">Summary</span></div>
+
+<section class="chapter chapter-wide fade-in">
+  <div class="chapter-label">
+    <span class="chapter-label-num">✈</span>
+    Key Takeaways
+  </div>
+  <h2>What the Data Tells Us</h2>
+
+  <div class="insight-row fade-in">
+    <div class="insight-card">
+      <div class="insight-value" style="font-size:1.5rem; margin-bottom:0.5rem;">The East Dominates</div>
+      <div class="insight-label">The Sydney–Melbourne–Brisbane triangle accounts for the overwhelming majority of domestic passenger traffic. Geography and population concentration make this corridor irreplaceable.</div>
+    </div>
+    <div class="insight-card gold">
+      <div class="insight-value" style="font-size:1.5rem; margin-bottom:0.5rem;">COVID Changed Everything</div>
+      <div class="insight-label">The pandemic dealt Australian aviation its worst shock in history. Recovery has been near-complete in volume, but punctuality has not recovered — and some routes remain permanently disrupted.</div>
+    </div>
+    <div class="insight-card steel">
+      <div class="insight-value" style="font-size:1.5rem; margin-bottom:0.5rem;">Size ≠ Quality</div>
+      <div class="insight-label">Bigger airports and larger airlines do not automatically deliver better on-time performance. Operational complexity, network dependencies, and geographic factors play an equal or greater role.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-value" style="font-size:1.5rem; margin-bottom:0.5rem;">Resources Drive Recovery</div>
+      <div class="insight-label">Western Australia's resource sector has created a new tier of domestic aviation demand, pushing several WA regional routes well above their 2019 passenger counts.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="footer-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="footer-col">
+      <h4>Data Sources</h4>
+      <p>Bureau of Infrastructure and Transport Research Economics (BITRE) — Domestic Aviation Activity Annual Summary 1984–2025.</p>
+      <p style="margin-top:0.5rem;">BITRE On-Time Performance Statistics 2019 &amp; 2024.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Authorship</h4>
+      <p>Jot Bajwa · 2 June 2026</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Data: BITRE · Charts: Vega-Lite</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════ VEGA-EMBED SCRIPTS ═══════════════════════ -->
+<script>
+  const VEGA_OPTS = {
+    renderer: 'svg',
+    actions: false,
+    theme: 'dark',
+    config: {
+      background: 'transparent'
+    }
+  };
+
+  // Load a Vega-Lite chart, scaling it to exactly fill its container box.
+  async function loadChart(elementId, jsonPath) {
+    try {
+      const res = await fetch(jsonPath);
+      const spec = await res.json();
+      spec.background = 'transparent';
+
+      const container = document.getElementById(elementId);
+      // Inner width: subtract the chart-wrap padding (1.2rem left + 1rem right ≈ 35px)
+      const containerW = container.getBoundingClientRect().width - 35;
+
+      if (spec.width && typeof spec.width === 'number' && containerW > 100) {
+        const pad = spec.padding || {};
+        const rightPad  = typeof pad === 'number' ? pad : (pad.right  || 0);
+        const leftPad   = typeof pad === 'number' ? pad : (pad.left   || 0);
+
+        const originalPlotW = spec.width;
+        // New plot width = container minus the spec's own left/right padding (for legends etc.)
+        const newPlotW = Math.max(containerW - leftPad - rightPad, 200);
+        const ratio = newPlotW / originalPlotW;
+
+        spec.width = newPlotW;
+        if (spec.height && typeof spec.height === 'number') {
+          // Scale height proportionally, but cap the increase to avoid excessively tall charts
+          spec.height = Math.round(spec.height * Math.min(ratio, 1.35));
+        }
+      }
+
+      await vegaEmbed(`#${elementId}`, spec, VEGA_OPTS);
+    } catch(e) {
+      console.error(`Failed to load ${jsonPath}:`, e);
+      document.getElementById(elementId).innerHTML =
+        `<p style="color:#8dafc8; padding:2rem; text-align:center; font-style:italic;">Chart could not be loaded. Ensure ${jsonPath} is accessible.</p>`;
+    }
+  }
+
+  // Mount all charts
+  loadChart('chart1',  'chart1_route_map.json');
+  loadChart('chart2',  'chart2_annual_passengers.json');
+  loadChart('chart3',  'chart3_top20_routes.json');
+  loadChart('chart4',  'chart4_airport_bubbles_copy.json');
+  loadChart('chart5',  'chart5_monthly_heatmap.json');
+  loadChart('chart6',  'chart6_airline_punctuality.json');
+  loadChart('chart7',  'chart7_dumbbell_airline_otp.json');
+  loadChart('chart8',  'chart8_scatter_load_factor.json');
+  loadChart('chart9',  'chart9_lollipop_delayed_routes.json');
+  loadChart('chart10', 'chart10_diverging_recovery.json');
+  loadChart('chart11', 'chart11_bubble_airport_otp.json');
+
+  // Scroll-triggered fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

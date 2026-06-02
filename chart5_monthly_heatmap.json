@@ -1,0 +1,1140 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Monthly Rhythm of Australian Flying (2015\u20132024)",
+    "subtitle": "Each cell = one month. Colour intensity = passenger volume. Larger markers highlight lower load factors during the COVID period.",
+    "font": "DM Sans",
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "subtitleFont": "DM Sans",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#c9d6e3",
+    "color": "#f4f7fb",
+    "anchor": "start"
+  },
+  "width": 900,
+  "height": 320,
+  "background": "#071a2d",
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "DM Sans",
+    "axis": {
+      "domain": false,
+      "grid": false,
+      "tickColor": "#4a6178",
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    }
+  },
+  "data": {
+    "values": [
+      {
+        "year": 2015,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 4671622,
+        "load_factor": 75.7
+      },
+      {
+        "year": 2015,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4220452,
+        "load_factor": 74.7
+      },
+      {
+        "year": 2015,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 4832657,
+        "load_factor": 75.9
+      },
+      {
+        "year": 2015,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4760733,
+        "load_factor": 76.1
+      },
+      {
+        "year": 2015,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4534651,
+        "load_factor": 72.9
+      },
+      {
+        "year": 2015,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4467707,
+        "load_factor": 72.8
+      },
+      {
+        "year": 2015,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5154630,
+        "load_factor": 79.4
+      },
+      {
+        "year": 2015,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4799488,
+        "load_factor": 76.1
+      },
+      {
+        "year": 2015,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 4904998,
+        "load_factor": 76.9
+      },
+      {
+        "year": 2015,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5199136,
+        "load_factor": 79.6
+      },
+      {
+        "year": 2015,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 4950606,
+        "load_factor": 79.1
+      },
+      {
+        "year": 2015,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5058441,
+        "load_factor": 78.2
+      },
+      {
+        "year": 2016,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 4823544,
+        "load_factor": 76.9
+      },
+      {
+        "year": 2016,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4466668,
+        "load_factor": 74.1
+      },
+      {
+        "year": 2016,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 4978550,
+        "load_factor": 76.9
+      },
+      {
+        "year": 2016,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4842785,
+        "load_factor": 77.1
+      },
+      {
+        "year": 2016,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4673297,
+        "load_factor": 76.8
+      },
+      {
+        "year": 2016,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4614311,
+        "load_factor": 77.6
+      },
+      {
+        "year": 2016,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5191861,
+        "load_factor": 80.6
+      },
+      {
+        "year": 2016,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4891187,
+        "load_factor": 76.1
+      },
+      {
+        "year": 2016,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 5064249,
+        "load_factor": 78.6
+      },
+      {
+        "year": 2016,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5244558,
+        "load_factor": 80.0
+      },
+      {
+        "year": 2016,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5059011,
+        "load_factor": 79.3
+      },
+      {
+        "year": 2016,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5142945,
+        "load_factor": 79.4
+      },
+      {
+        "year": 2017,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 4976994,
+        "load_factor": 79.1
+      },
+      {
+        "year": 2017,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4357102,
+        "load_factor": 75.2
+      },
+      {
+        "year": 2017,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 5006527,
+        "load_factor": 77.4
+      },
+      {
+        "year": 2017,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4943013,
+        "load_factor": 79.5
+      },
+      {
+        "year": 2017,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4748648,
+        "load_factor": 77.1
+      },
+      {
+        "year": 2017,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4699794,
+        "load_factor": 77.4
+      },
+      {
+        "year": 2017,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5307405,
+        "load_factor": 82.2
+      },
+      {
+        "year": 2017,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4983145,
+        "load_factor": 78.0
+      },
+      {
+        "year": 2017,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 5073889,
+        "load_factor": 80.4
+      },
+      {
+        "year": 2017,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5423449,
+        "load_factor": 82.3
+      },
+      {
+        "year": 2017,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5227105,
+        "load_factor": 82.0
+      },
+      {
+        "year": 2017,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5248587,
+        "load_factor": 81.0
+      },
+      {
+        "year": 2018,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 5080227,
+        "load_factor": 79.5
+      },
+      {
+        "year": 2018,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4534840,
+        "load_factor": 78.0
+      },
+      {
+        "year": 2018,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 5226827,
+        "load_factor": 80.4
+      },
+      {
+        "year": 2018,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 5084663,
+        "load_factor": 79.6
+      },
+      {
+        "year": 2018,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4866754,
+        "load_factor": 78.1
+      },
+      {
+        "year": 2018,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4722609,
+        "load_factor": 78.6
+      },
+      {
+        "year": 2018,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5442842,
+        "load_factor": 83.2
+      },
+      {
+        "year": 2018,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 5187661,
+        "load_factor": 81.1
+      },
+      {
+        "year": 2018,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 5083169,
+        "load_factor": 81.4
+      },
+      {
+        "year": 2018,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5500983,
+        "load_factor": 82.4
+      },
+      {
+        "year": 2018,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5235228,
+        "load_factor": 83.3
+      },
+      {
+        "year": 2018,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5146512,
+        "load_factor": 80.6
+      },
+      {
+        "year": 2019,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 5070214,
+        "load_factor": 78.9
+      },
+      {
+        "year": 2019,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4501753,
+        "load_factor": 77.3
+      },
+      {
+        "year": 2019,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 5064976,
+        "load_factor": 78.7
+      },
+      {
+        "year": 2019,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 5151508,
+        "load_factor": 80.3
+      },
+      {
+        "year": 2019,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4886567,
+        "load_factor": 77.4
+      },
+      {
+        "year": 2019,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4710385,
+        "load_factor": 78.3
+      },
+      {
+        "year": 2019,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5455578,
+        "load_factor": 82.3
+      },
+      {
+        "year": 2019,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 5196622,
+        "load_factor": 82.5
+      },
+      {
+        "year": 2019,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 5191883,
+        "load_factor": 81.8
+      },
+      {
+        "year": 2019,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5644833,
+        "load_factor": 84.5
+      },
+      {
+        "year": 2019,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5257549,
+        "load_factor": 83.8
+      },
+      {
+        "year": 2019,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5257721,
+        "load_factor": 82.5
+      },
+      {
+        "year": 2020,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 5096792,
+        "load_factor": 82.0
+      },
+      {
+        "year": 2020,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4365877,
+        "load_factor": 75.5
+      },
+      {
+        "year": 2020,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 3073845,
+        "load_factor": 62.7
+      },
+      {
+        "year": 2020,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 145895,
+        "load_factor": 28.2
+      },
+      {
+        "year": 2020,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 176408,
+        "load_factor": 40.1
+      },
+      {
+        "year": 2020,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 379657,
+        "load_factor": 53.3
+      },
+      {
+        "year": 2020,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 732986,
+        "load_factor": 59.1
+      },
+      {
+        "year": 2020,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 579802,
+        "load_factor": 51.7
+      },
+      {
+        "year": 2020,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 699714,
+        "load_factor": 56.1
+      },
+      {
+        "year": 2020,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 909374,
+        "load_factor": 60.9
+      },
+      {
+        "year": 2020,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 1107078,
+        "load_factor": 62.0
+      },
+      {
+        "year": 2020,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 2178128,
+        "load_factor": 65.8
+      },
+      {
+        "year": 2021,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 1649907,
+        "load_factor": 59.9
+      },
+      {
+        "year": 2021,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 1624120,
+        "load_factor": 58.9
+      },
+      {
+        "year": 2021,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 2800293,
+        "load_factor": 66.7
+      },
+      {
+        "year": 2021,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 3529380,
+        "load_factor": 70.7
+      },
+      {
+        "year": 2021,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 3390870,
+        "load_factor": 68.3
+      },
+      {
+        "year": 2021,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 2354655,
+        "load_factor": 62.8
+      },
+      {
+        "year": 2021,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 1349665,
+        "load_factor": 50.6
+      },
+      {
+        "year": 2021,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 731070,
+        "load_factor": 45.5
+      },
+      {
+        "year": 2021,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 997815,
+        "load_factor": 54.9
+      },
+      {
+        "year": 2021,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 1052069,
+        "load_factor": 54.0
+      },
+      {
+        "year": 2021,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 1521194,
+        "load_factor": 57.4
+      },
+      {
+        "year": 2021,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 2549920,
+        "load_factor": 55.8
+      },
+      {
+        "year": 2022,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 2558416,
+        "load_factor": 59.2
+      },
+      {
+        "year": 2022,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 2439681,
+        "load_factor": 68.4
+      },
+      {
+        "year": 2022,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 3603138,
+        "load_factor": 72.7
+      },
+      {
+        "year": 2022,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4662038,
+        "load_factor": 78.4
+      },
+      {
+        "year": 2022,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4365139,
+        "load_factor": 74.5
+      },
+      {
+        "year": 2022,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4526091,
+        "load_factor": 79.9
+      },
+      {
+        "year": 2022,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 4816510,
+        "load_factor": 85.8
+      },
+      {
+        "year": 2022,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4462833,
+        "load_factor": 81.0
+      },
+      {
+        "year": 2022,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 4682067,
+        "load_factor": 85.7
+      },
+      {
+        "year": 2022,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 4851329,
+        "load_factor": 85.3
+      },
+      {
+        "year": 2022,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 4667010,
+        "load_factor": 83.1
+      },
+      {
+        "year": 2022,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 4563278,
+        "load_factor": 79.9
+      },
+      {
+        "year": 2023,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 4497489,
+        "load_factor": 77.8
+      },
+      {
+        "year": 2023,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4001958,
+        "load_factor": 77.2
+      },
+      {
+        "year": 2023,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 4828800,
+        "load_factor": 81.8
+      },
+      {
+        "year": 2023,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4701092,
+        "load_factor": 79.7
+      },
+      {
+        "year": 2023,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4634188,
+        "load_factor": 76.7
+      },
+      {
+        "year": 2023,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4589042,
+        "load_factor": 78.3
+      },
+      {
+        "year": 2023,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5008662,
+        "load_factor": 82.8
+      },
+      {
+        "year": 2023,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4891363,
+        "load_factor": 79.7
+      },
+      {
+        "year": 2023,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 4985290,
+        "load_factor": 81.6
+      },
+      {
+        "year": 2023,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5188632,
+        "load_factor": 82.6
+      },
+      {
+        "year": 2023,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5042390,
+        "load_factor": 85.2
+      },
+      {
+        "year": 2023,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 4904418,
+        "load_factor": 81.6
+      },
+      {
+        "year": 2024,
+        "month": 1,
+        "month_name": "Jan",
+        "passengers": 4795552,
+        "load_factor": 77.1
+      },
+      {
+        "year": 2024,
+        "month": 2,
+        "month_name": "Feb",
+        "passengers": 4569367,
+        "load_factor": 80.6
+      },
+      {
+        "year": 2024,
+        "month": 3,
+        "month_name": "Mar",
+        "passengers": 4975848,
+        "load_factor": 80.4
+      },
+      {
+        "year": 2024,
+        "month": 4,
+        "month_name": "Apr",
+        "passengers": 4926302,
+        "load_factor": 77.6
+      },
+      {
+        "year": 2024,
+        "month": 5,
+        "month_name": "May",
+        "passengers": 4743644,
+        "load_factor": 78.3
+      },
+      {
+        "year": 2024,
+        "month": 6,
+        "month_name": "Jun",
+        "passengers": 4596562,
+        "load_factor": 78.8
+      },
+      {
+        "year": 2024,
+        "month": 7,
+        "month_name": "Jul",
+        "passengers": 5151300,
+        "load_factor": 81.5
+      },
+      {
+        "year": 2024,
+        "month": 8,
+        "month_name": "Aug",
+        "passengers": 4954131,
+        "load_factor": 83.3
+      },
+      {
+        "year": 2024,
+        "month": 9,
+        "month_name": "Sep",
+        "passengers": 5017354,
+        "load_factor": 83.8
+      },
+      {
+        "year": 2024,
+        "month": 10,
+        "month_name": "Oct",
+        "passengers": 5372841,
+        "load_factor": 86.6
+      },
+      {
+        "year": 2024,
+        "month": 11,
+        "month_name": "Nov",
+        "passengers": 5089710,
+        "load_factor": 87.0
+      },
+      {
+        "year": 2024,
+        "month": 12,
+        "month_name": "Dec",
+        "passengers": 5095635,
+        "load_factor": 83.8
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": -45,
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "labelColor": "#d9e2ec",
+            "titleColor": "#f4f7fb",
+            "tickColor": "#4a6178",
+            "domain": false
+          }
+        },
+        "y": {
+          "field": "month",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "axis": {
+            "title": null,
+            "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]",
+            "labelFontSize": 11,
+            "labelColor": "#d9e2ec",
+            "titleColor": "#f4f7fb",
+            "tickColor": "#4a6178",
+            "domain": false
+          }
+        },
+        "color": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              5600000
+            ],
+            "range": [
+              "#0b1f33",
+              "#12314d",
+              "#1b4a63",
+              "#25697a",
+              "#3d8f94",
+              "#f0c05a"
+            ]
+          },
+          "legend": {
+            "title": "Passengers",
+            "format": "~s",
+            "titleColor": "#f4f7fb",
+            "labelColor": "#d9e2ec",
+            "gradientStrokeColor": "#5b6b7a"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "month_name",
+            "title": "Month"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers",
+            "format": ","
+          },
+          {
+            "field": "load_factor",
+            "title": "Load Factor (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "opacity": 0.55
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "month",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "size": {
+          "condition": [
+            {
+              "test": "datum.load_factor < 70",
+              "value": 35
+            },
+            {
+              "test": "datum.load_factor >= 70 && datum.load_factor < 80",
+              "value": 13
+            }
+          ],
+          "value": 0,
+          "legend": null
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.load_factor < 70",
+              "value": "#f0c05a"
+            },
+            {
+              "test": "datum.load_factor >= 70 && datum.load_factor < 80",
+              "value": "#62c7d1"
+            }
+          ],
+          "value": "transparent",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year"
+          },
+          {
+            "field": "month_name",
+            "title": "Month"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers",
+            "format": ","
+          },
+          {
+            "field": "load_factor",
+            "title": "Load Factor (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2020
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "strokeWidth": 1.5,
+        "color": "#e8b84f",
+        "opacity": 0.75
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2020,
+            "month": 1,
+            "label": "\u2190 COVID-19: borders closed Apr 2020"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 8,
+        "dy": -12,
+        "fontSize": 10,
+        "color": "#f0c05a",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "month",
+          "type": "ordinal",
+          "sort": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared"
+    }
+  },
+  "padding": {
+    "left": 20,
+    "right": 20,
+    "top": 20,
+    "bottom": 20
+  }
+}

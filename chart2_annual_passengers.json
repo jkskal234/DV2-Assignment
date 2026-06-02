@@ -1,0 +1,559 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Australia\u2019s Domestic Flying Recovered After Its Biggest Shock",
+    "subtitle": "Domestic passenger volumes grew for decades, collapsed during COVID-19, then returned close to pre-pandemic levels by 2025.",
+    "font": "DM Sans",
+    "fontSize": 20,
+    "fontWeight": "bold",
+    "color": "#f5f7fa",
+    "subtitleFont": "DM Sans",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#c8d8e8",
+    "anchor": "middle",
+    "offset": 14
+  },
+  "width": 900,
+  "height": 410,
+  "background": "#0d1b2e",
+  "padding": {
+    "left": 20,
+    "right": 80,
+    "top": 20,
+    "bottom": 20
+  },
+  "datasets": {
+    "annual_passengers": [
+      {
+        "year": 1984,
+        "passengers": 13299666
+      },
+      {
+        "year": 1985,
+        "passengers": 14360280
+      },
+      {
+        "year": 1986,
+        "passengers": 15088784
+      },
+      {
+        "year": 1987,
+        "passengers": 15875026
+      },
+      {
+        "year": 1988,
+        "passengers": 17188797
+      },
+      {
+        "year": 1989,
+        "passengers": 12935552
+      },
+      {
+        "year": 1990,
+        "passengers": 15578005
+      },
+      {
+        "year": 1991,
+        "passengers": 19644591
+      },
+      {
+        "year": 1992,
+        "passengers": 20698976
+      },
+      {
+        "year": 1993,
+        "passengers": 22214515
+      },
+      {
+        "year": 1994,
+        "passengers": 24806496
+      },
+      {
+        "year": 1995,
+        "passengers": 26572918
+      },
+      {
+        "year": 1996,
+        "passengers": 27839291
+      },
+      {
+        "year": 1997,
+        "passengers": 28088027
+      },
+      {
+        "year": 1998,
+        "passengers": 28426239
+      },
+      {
+        "year": 1999,
+        "passengers": 29425516
+      },
+      {
+        "year": 2000,
+        "passengers": 31542030
+      },
+      {
+        "year": 2001,
+        "passengers": 31711142
+      },
+      {
+        "year": 2002,
+        "passengers": 30162431
+      },
+      {
+        "year": 2003,
+        "passengers": 33125643
+      },
+      {
+        "year": 2004,
+        "passengers": 37847509
+      },
+      {
+        "year": 2005,
+        "passengers": 40748696
+      },
+      {
+        "year": 2006,
+        "passengers": 43674161
+      },
+      {
+        "year": 2007,
+        "passengers": 46745297
+      },
+      {
+        "year": 2008,
+        "passengers": 49856930
+      },
+      {
+        "year": 2009,
+        "passengers": 49847748
+      },
+      {
+        "year": 2010,
+        "passengers": 53337119
+      },
+      {
+        "year": 2011,
+        "passengers": 53860218
+      },
+      {
+        "year": 2012,
+        "passengers": 56084078
+      },
+      {
+        "year": 2013,
+        "passengers": 57154984
+      },
+      {
+        "year": 2014,
+        "passengers": 57352814
+      },
+      {
+        "year": 2015,
+        "passengers": 57447521
+      },
+      {
+        "year": 2016,
+        "passengers": 58913209
+      },
+      {
+        "year": 2017,
+        "passengers": 59859261
+      },
+      {
+        "year": 2018,
+        "passengers": 60911429
+      },
+      {
+        "year": 2019,
+        "passengers": 61182340
+      },
+      {
+        "year": 2020,
+        "passengers": 19392182
+      },
+      {
+        "year": 2021,
+        "passengers": 23530655
+      },
+      {
+        "year": 2022,
+        "passengers": 49949513
+      },
+      {
+        "year": 2023,
+        "passengers": 57072988
+      },
+      {
+        "year": 2024,
+        "passengers": 59119645
+      },
+      {
+        "year": 2025,
+        "passengers": 60131140
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#d7e3f1",
+      "titleColor": "#f5f7fa",
+      "gridColor": "#24384f",
+      "domainColor": "#58708b",
+      "tickColor": "#58708b"
+    }
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "start": 2001,
+            "end": 2002
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "color": "#e8b84b",
+        "opacity": 0.15
+      },
+      "encoding": {
+        "x": {
+          "field": "start",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          }
+        },
+        "x2": {
+          "field": "end"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 410
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "start": 2020,
+            "end": 2022
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "color": "#e76f51",
+        "opacity": 0.18
+      },
+      "encoding": {
+        "x": {
+          "field": "start",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          }
+        },
+        "x2": {
+          "field": "end"
+        },
+        "y": {
+          "value": 0
+        },
+        "y2": {
+          "value": 410
+        }
+      }
+    },
+    {
+      "data": {
+        "name": "annual_passengers"
+      },
+      "mark": {
+        "type": "area",
+        "color": "#56c0b5",
+        "opacity": 0.18
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          },
+          "axis": {
+            "title": "Year",
+            "format": "d",
+            "tickMinStep": 1,
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70000000
+            ]
+          },
+          "axis": {
+            "title": "Total Passengers",
+            "format": "~s"
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "name": "annual_passengers"
+      },
+      "mark": {
+        "type": "line",
+        "color": "#56c0b5",
+        "strokeWidth": 3,
+        "point": {
+          "filled": true,
+          "color": "#f5f7fa",
+          "stroke": "#56c0b5",
+          "strokeWidth": 1.5,
+          "size": 34
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          },
+          "axis": {
+            "title": "Year",
+            "format": "d",
+            "tickMinStep": 1,
+            "labelAngle": 0
+          }
+        },
+        "y": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70000000
+            ]
+          },
+          "axis": {
+            "title": "Total Passengers",
+            "format": "~s"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 1984,
+            "passengers": 13299666
+          },
+          {
+            "year": 2019,
+            "passengers": 61182340
+          },
+          {
+            "year": 2020,
+            "passengers": 19392182
+          },
+          {
+            "year": 2025,
+            "passengers": 60131140
+          }
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "color": "#e8b84b",
+        "stroke": "#f5f7fa",
+        "strokeWidth": 1,
+        "size": 95
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70000000
+            ]
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 1984,
+            "passengers": 9000000,
+            "label": "1984\n13.3M"
+          },
+          {
+            "year": 2001.5,
+            "passengers": 36000000,
+            "label": "Ansett collapse\nbrief disruption"
+          },
+          {
+            "year": 2019,
+            "passengers": 65000000,
+            "label": "2019 peak\n61.2M"
+          },
+          {
+            "year": 2020,
+            "passengers": 14500000,
+            "label": "2020 shock\n19.4M"
+          },
+          {
+            "year": 2025,
+            "passengers": 63500000,
+            "label": "2025 recovery\n60.1M"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "lineBreak": "\n",
+        "color": "#f5f7fa",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70000000
+            ]
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 1992,
+            "passengers": 66000000,
+            "label": "Long-term growth was interrupted far more by COVID-19 than by earlier aviation shocks."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#c8d8e8",
+        "align": "left",
+        "limit": 520
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              1984,
+              2025
+            ],
+            "zero": false
+          }
+        },
+        "y": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              70000000
+            ]
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

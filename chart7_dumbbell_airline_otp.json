@@ -1,0 +1,342 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 7 \u2014 Dumbbell chart: airline on-time departure rate change, 2019 vs 2024",
+  "title": {
+    "text": "Airline Punctuality Fell Across the Board",
+    "subtitle": "On-time departure rates were lower in 2024 than in 2019 for every major domestic airline. Green dots show 2019; gold dots show 2024.",
+    "fontSize": 22,
+    "subtitleFontSize": 14,
+    "subtitleColor": "#666666",
+    "anchor": "start",
+    "offset": 14
+  },
+  "width": 760,
+  "height": 380,
+  "padding": {
+    "left": 10,
+    "right": 60,
+    "top": 20,
+    "bottom": 10
+  },
+  "data": {
+    "values": [
+      {
+        "airline": "Jetstar",
+        "otp_2019": 72.88,
+        "otp_2024": 71.38,
+        "change": -1.5
+      },
+      {
+        "airline": "Qantas",
+        "otp_2019": 79.52,
+        "otp_2024": 74.11,
+        "change": -5.4
+      },
+      {
+        "airline": "QantasLink",
+        "otp_2019": 82.91,
+        "otp_2024": 77.42,
+        "change": -5.5
+      },
+      {
+        "airline": "Rex Airlines",
+        "otp_2019": 84.84,
+        "otp_2024": 78.15,
+        "change": -6.7
+      },
+      {
+        "airline": "Virgin Australia",
+        "otp_2019": 81.33,
+        "otp_2024": 73.93,
+        "change": -7.4
+      }
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "national_avg_2024": 75.4
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          5,
+          5
+        ],
+        "color": "#8A8A8A",
+        "size": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "national_avg_2024",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              64,
+              90
+            ]
+          },
+          "title": "On-Time Departure Rate (%)",
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titleFontWeight": "bold",
+            "grid": true,
+            "gridColor": "#E8E8E8",
+            "tickColor": "#CCCCCC",
+            "domainColor": "#AAAAAA"
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "airline": "Virgin Australia",
+            "national_avg_2024": 75.4,
+            "label": "2024 national average: 75.4%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dx": 6,
+        "dy": -18,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#777777"
+      },
+      "encoding": {
+        "x": {
+          "field": "national_avg_2024",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "airline",
+          "type": "nominal",
+          "sort": [
+            "Virgin Australia",
+            "Rex Airlines",
+            "QantasLink",
+            "Qantas",
+            "Jetstar"
+          ]
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#CFCFCF",
+        "size": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "airline",
+          "type": "nominal",
+          "sort": [
+            "Virgin Australia",
+            "Rex Airlines",
+            "QantasLink",
+            "Qantas",
+            "Jetstar"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 13,
+            "labelPadding": 8
+          }
+        },
+        "x": {
+          "field": "otp_2024",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              64,
+              90
+            ]
+          },
+          "title": "On-Time Departure Rate (%)",
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "titleFontWeight": "bold",
+            "grid": true,
+            "gridColor": "#E8E8E8",
+            "tickColor": "#CCCCCC",
+            "domainColor": "#AAAAAA"
+          }
+        },
+        "x2": {
+          "field": "otp_2019"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "otp_2019",
+            "otp_2024"
+          ],
+          "as": [
+            "year_key",
+            "otp"
+          ]
+        },
+        {
+          "calculate": "datum.year_key == 'otp_2019' ? '2019' : '2024'",
+          "as": "year"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 170,
+        "opacity": 1,
+        "stroke": "white",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "y": {
+          "field": "airline",
+          "type": "nominal",
+          "sort": [
+            "Virgin Australia",
+            "Rex Airlines",
+            "QantasLink",
+            "Qantas",
+            "Jetstar"
+          ],
+          "title": null,
+          "axis": {
+            "labelFontSize": 13,
+            "labelPadding": 8
+          }
+        },
+        "x": {
+          "field": "otp",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              64,
+              90
+            ]
+          }
+        },
+        "color": {
+          "field": "year",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "2019",
+              "2024"
+            ],
+            "range": [
+              "#1F6F5F",
+              "#C9A227"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top-right",
+            "direction": "horizontal",
+            "labelFontSize": 13,
+            "symbolSize": 180,
+            "symbolType": "circle"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "airline",
+            "type": "nominal",
+            "title": "Airline"
+          },
+          {
+            "field": "year",
+            "type": "nominal",
+            "title": "Year"
+          },
+          {
+            "field": "otp",
+            "type": "quantitative",
+            "title": "On-Time Rate (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "change",
+            "type": "quantitative",
+            "title": "Change from 2019 to 2024 (pts)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "format(datum.change, '.1f') + ' pts'",
+          "as": "change_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#4F4F4F"
+      },
+      "encoding": {
+        "y": {
+          "field": "airline",
+          "type": "nominal",
+          "sort": [
+            "Virgin Australia",
+            "Rex Airlines",
+            "QantasLink",
+            "Qantas",
+            "Jetstar"
+          ]
+        },
+        "x": {
+          "field": "otp_2024",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "change_label"
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared"
+    }
+  },
+  "config": {
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, system-ui, sans-serif",
+    "axis": {
+      "labelColor": "#222222",
+      "titleColor": "#111111"
+    }
+  }
+}

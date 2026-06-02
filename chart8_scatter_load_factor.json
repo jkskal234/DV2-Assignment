@@ -1,0 +1,338 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australia's Busiest Routes: Recovery & Efficiency, 2019 vs 2024",
+    "subtitle": "Each line connects the same route in 2019 (circle) and 2024 (diamond). Most routes became fuller, but less punctual.",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "fontWeight": "bold",
+    "anchor": "start",
+    "offset": 14,
+    "color": "#e2e8f0",
+    "subtitleColor": "#7fb3d3"
+  },
+  "background": "#0d1b2a",
+  "width": 760,
+  "height": 460,
+  "padding": {
+    "left": 60,
+    "right": 40,
+    "top": 30,
+    "bottom": 55
+  },
+  "data": {
+    "values": [
+      {"route": "SYD–MEL", "lf19": 79.2, "otp19": 82.4, "lf24": 84.1, "otp24": 75.3, "pax24": 9850000, "hub": "SYD/MEL Trunk"},
+      {"route": "SYD–BNE", "lf19": 77.8, "otp19": 78.6, "lf24": 82.5, "otp24": 72.1, "pax24": 5310000, "hub": "SYD/MEL Trunk"},
+      {"route": "MEL–BNE", "lf19": 75.4, "otp19": 80.2, "lf24": 81.7, "otp24": 74.8, "pax24": 4920000, "hub": "SYD/MEL Trunk"},
+      {"route": "SYD–PER", "lf19": 80.6, "otp19": 83.1, "lf24": 85.9, "otp24": 76.2, "pax24": 3480000, "hub": "Cross-country"},
+      {"route": "MEL–PER", "lf19": 78.9, "otp19": 81.7, "lf24": 84.3, "otp24": 77.4, "pax24": 3120000, "hub": "Cross-country"},
+      {"route": "SYD–ADL", "lf19": 74.3, "otp19": 82.8, "lf24": 79.6, "otp24": 78.1, "pax24": 2650000, "hub": "Secondary trunk"},
+      {"route": "MEL–ADL", "lf19": 73.1, "otp19": 83.5, "lf24": 78.4, "otp24": 79.3, "pax24": 2410000, "hub": "Secondary trunk"},
+      {"route": "SYD–CBR", "lf19": 68.4, "otp19": 79.3, "lf24": 71.2, "otp24": 76.4, "pax24": 1540000, "hub": "Secondary trunk"},
+      {"route": "MEL–OOL", "lf19": 81.2, "otp19": 76.8, "lf24": 85.6, "otp24": 70.2, "pax24": 2230000, "hub": "Leisure"},
+      {"route": "SYD–OOL", "lf19": 82.4, "otp19": 75.2, "lf24": 87.1, "otp24": 68.9, "pax24": 2790000, "hub": "Leisure"},
+      {"route": "BNE–OOL", "lf19": 83.1, "otp19": 72.4, "lf24": 86.4, "otp24": 67.3, "pax24": 1870000, "hub": "Leisure"},
+      {"route": "MEL–HBA", "lf19": 70.2, "otp19": 85.1, "lf24": 73.8, "otp24": 82.6, "pax24": 890000, "hub": "Regional"},
+      {"route": "SYD–CNS", "lf19": 76.8, "otp19": 81.4, "lf24": 82.3, "otp24": 74.9, "pax24": 1340000, "hub": "Leisure"},
+      {"route": "MEL–CNS", "lf19": 74.5, "otp19": 79.8, "lf24": 80.1, "otp24": 73.6, "pax24": 1120000, "hub": "Leisure"},
+      {"route": "BNE–CNS", "lf19": 72.3, "otp19": 80.6, "lf24": 77.4, "otp24": 75.8, "pax24": 960000, "hub": "Regional"}
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "datum.otp24 - datum.otp19",
+      "as": "otp_change"
+    },
+    {
+      "calculate": "datum.lf24 - datum.lf19",
+      "as": "lf_change"
+    },
+    {
+      "calculate": "datum.route == 'SYD–MEL' || datum.route == 'SYD–OOL' || datum.route == 'BNE–OOL' || datum.route == 'MEL–HBA' || datum.route == 'MEL–ADL' || datum.route == 'SYD–CBR' ? datum.route : ''",
+      "as": "label_route"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "color": "#102438",
+        "opacity": 0.7
+      },
+      "encoding": {
+        "x": {"datum": 80},
+        "x2": {"datum": 89},
+        "y": {"datum": 66},
+        "y2": {"datum": 80}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "dy": 6,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#7fb3d3",
+        "text": "Fuller but less punctual zone"
+      },
+      "encoding": {
+        "x": {"datum": 80},
+        "y": {"datum": 80}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#f0c05a",
+        "strokeDash": [5, 4],
+        "strokeWidth": 1.2,
+        "opacity": 0.75
+      },
+      "encoding": {
+        "y": {"datum": 80}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#62c7d1",
+        "strokeDash": [5, 4],
+        "strokeWidth": 1.2,
+        "opacity": 0.65
+      },
+      "encoding": {
+        "x": {"datum": 80}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2.4,
+        "opacity": 0.72
+      },
+      "encoding": {
+        "x": {
+          "field": "lf19",
+          "type": "quantitative",
+          "title": "Load factor — % of seats filled",
+          "scale": {
+            "domain": [68, 88],
+            "nice": false,
+            "zero": false
+          },
+          "axis": {
+            "format": ".0f",
+            "values": [68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88],
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "grid": true,
+            "gridColor": "#1a2e42",
+            "gridDash": [3, 4],
+            "labelColor": "#7fb3d3",
+            "titleColor": "#4a90b8"
+          }
+        },
+        "x2": {"field": "lf24"},
+        "y": {
+          "field": "otp19",
+          "type": "quantitative",
+          "title": "On-time performance (%)",
+          "scale": {
+            "domain": [66, 86],
+            "nice": false,
+            "zero": false
+          },
+          "axis": {
+            "format": ".0f",
+            "values": [66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86],
+            "labelFontSize": 11,
+            "titleFontSize": 13,
+            "grid": true,
+            "gridColor": "#1a2e42",
+            "gridDash": [3, 4],
+            "labelColor": "#7fb3d3",
+            "titleColor": "#4a90b8"
+          }
+        },
+        "y2": {"field": "otp24"},
+        "color": {
+          "field": "hub",
+          "type": "nominal",
+          "title": "Route category",
+          "scale": {
+            "domain": ["SYD/MEL Trunk", "Cross-country", "Secondary trunk", "Leisure", "Regional"],
+            "range": ["#62c7d1", "#f0c05a", "#a78bfa", "#3d8f94", "#d66a3d"]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "titleColor": "#d9e2ec",
+            "labelColor": "#d9e2ec",
+            "symbolType": "square"
+          }
+        },
+        "tooltip": [
+          {"field": "route", "title": "Route"},
+          {"field": "hub", "title": "Category"},
+          {"field": "lf19", "title": "2019 Load factor (%)", "format": ".1f"},
+          {"field": "lf24", "title": "2024 Load factor (%)", "format": ".1f"},
+          {"field": "lf_change", "title": "Load factor change", "format": "+.1f"},
+          {"field": "otp19", "title": "2019 On-time (%)", "format": ".1f"},
+          {"field": "otp24", "title": "2024 On-time (%)", "format": ".1f"},
+          {"field": "otp_change", "title": "On-time change", "format": "+.1f"},
+          {"field": "pax24", "title": "2024 Passengers", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "shape": "circle",
+        "filled": true,
+        "size": 90,
+        "color": "#64748b",
+        "stroke": "#cbd5e1",
+        "strokeWidth": 1,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {"field": "lf19", "type": "quantitative"},
+        "y": {"field": "otp19", "type": "quantitative"},
+        "size": {
+          "field": "pax24",
+          "type": "quantitative",
+          "title": "2024 passengers",
+          "scale": {
+            "range": [45, 300]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "route", "title": "Route"},
+          {"value": "2019", "title": "Year"},
+          {"field": "lf19", "title": "Load factor (%)", "format": ".1f"},
+          {"field": "otp19", "title": "On-time performance (%)", "format": ".1f"},
+          {"field": "pax24", "title": "2024 Passengers", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "shape": "diamond",
+        "filled": true,
+        "strokeWidth": 1.2,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {"field": "lf24", "type": "quantitative"},
+        "y": {"field": "otp24", "type": "quantitative"},
+        "size": {
+          "field": "pax24",
+          "type": "quantitative",
+          "scale": {
+            "range": [55, 340]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "hub",
+          "type": "nominal",
+          "scale": {
+            "domain": ["SYD/MEL Trunk", "Cross-country", "Secondary trunk", "Leisure", "Regional"],
+            "range": ["#62c7d1", "#f0c05a", "#a78bfa", "#3d8f94", "#d66a3d"]
+          },
+          "legend": null
+        },
+        "stroke": {
+          "value": "#0d1b2a"
+        },
+        "tooltip": [
+          {"field": "route", "title": "Route"},
+          {"value": "2024", "title": "Year"},
+          {"field": "lf24", "title": "Load factor (%)", "format": ".1f"},
+          {"field": "otp24", "title": "On-time performance (%)", "format": ".1f"},
+          {"field": "pax24", "title": "2024 Passengers", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "dy": -3,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#d9e2ec",
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x": {"field": "lf24", "type": "quantitative"},
+        "y": {"field": "otp24", "type": "quantitative"},
+        "text": {
+          "field": "label_route"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"x": 68.5, "y": 85.1, "label": "● 2019"},
+          {"x": 68.5, "y": 84.1, "label": "◆ 2024"},
+          {"x": 68.5, "y": 83.1, "label": "Line = same route"}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#94a3b8"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared",
+      "size": "shared",
+      "x": "shared",
+      "y": "shared"
+    }
+  },
+  "config": {
+    "view": {
+      "stroke": "#1e3a5f",
+      "strokeWidth": 1
+    },
+    "font": "Inter, system-ui, sans-serif",
+    "axis": {
+      "domainColor": "#1e3a5f",
+      "tickColor": "#1e3a5f",
+      "labelColor": "#7fb3d3",
+      "titleColor": "#4a90b8"
+    },
+    "legend": {
+      "labelColor": "#94a3b8",
+      "titleColor": "#d9e2ec",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "padding": 8,
+      "cornerRadius": 6,
+      "fillColor": "#0f2133",
+      "strokeColor": "#1e3a5f",
+      "strokeWidth": 0.5
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 9 \u2014 Lollipop: 20 most delayed domestic routes, 2024",
+  "title": {
+    "text": "Some Regional and Leisure Routes Fall Well Below the National Average",
+    "subtitle": "On-time departure rates for the 20 worst-performing domestic routes in 2024, compared with the national average of 75.4%.",
+    "fontSize": 20,
+    "fontWeight": "bold",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#c9d6e3",
+    "color": "#f4f7fb",
+    "anchor": "start",
+    "offset": 12
+  },
+  "width": 860,
+  "height": 520,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "avg": 75.4
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#8fb7d9",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "size": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "avg",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              80
+            ]
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "avg": 75.4,
+            "label": "National average: 75.4%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#d9e2ec"
+      },
+      "encoding": {
+        "x": {
+          "field": "avg",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              50,
+              80
+            ]
+          }
+        },
+        "y": {
+          "value": 16
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "route": "Hamilton Island\u2013Sydney",
+            "otp": 55.06
+          },
+          {
+            "route": "Launceston\u2013Brisbane",
+            "otp": 57.72
+          },
+          {
+            "route": "Darwin\u2013Perth",
+            "otp": 58.49
+          },
+          {
+            "route": "Darwin\u2013Melbourne",
+            "otp": 60.4
+          },
+          {
+            "route": "Darwin\u2013Brisbane",
+            "otp": 60.69
+          },
+          {
+            "route": "Broome\u2013Perth",
+            "otp": 63.01
+          },
+          {
+            "route": "Cairns\u2013Melbourne",
+            "otp": 64.63
+          },
+          {
+            "route": "Perth\u2013Sydney",
+            "otp": 65.57
+          },
+          {
+            "route": "Proserpine\u2013Brisbane",
+            "otp": 65.61
+          },
+          {
+            "route": "Sunshine Coast\u2013Melbourne",
+            "otp": 65.62
+          },
+          {
+            "route": "Sydney\u2013Perth",
+            "otp": 66.54
+          },
+          {
+            "route": "Gold Coast\u2013Melbourne",
+            "otp": 66.61
+          },
+          {
+            "route": "Adelaide\u2013Perth",
+            "otp": 66.77
+          },
+          {
+            "route": "Townsville\u2013Brisbane",
+            "otp": 66.87
+          },
+          {
+            "route": "Hamilton Island\u2013Brisbane",
+            "otp": 67.34
+          },
+          {
+            "route": "Brisbane\u2013Mackay",
+            "otp": 67.72
+          },
+          {
+            "route": "Melbourne\u2013Darwin",
+            "otp": 67.84
+          },
+          {
+            "route": "Port Hedland\u2013Perth",
+            "otp": 67.95
+          },
+          {
+            "route": "Cairns\u2013Brisbane",
+            "otp": 68.03
+          },
+          {
+            "route": "Hobart\u2013Brisbane",
+            "otp": 68.53
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "size": 2
+          },
+          "encoding": {
+            "y": {
+              "field": "route",
+              "type": "nominal",
+              "sort": {
+                "field": "otp",
+                "order": "ascending"
+              },
+              "title": null,
+              "axis": {
+                "labelFontSize": 11,
+                "labelColor": "#f4f7fb"
+              }
+            },
+            "x": {
+              "field": "otp",
+              "type": "quantitative",
+              "title": "On-time departure rate (%) \u2014 lower means more delays",
+              "scale": {
+                "domain": [
+                  50,
+                  80
+                ]
+              },
+              "axis": {
+                "labelFontSize": 11,
+                "titleFontSize": 12,
+                "titleColor": "#f4f7fb",
+                "labelColor": "#d9e2ec",
+                "grid": true,
+                "gridColor": "#28425b"
+              }
+            },
+            "x2": {
+              "value": 50
+            },
+            "color": {
+              "condition": [
+                {
+                  "test": "datum.otp < 60",
+                  "value": "#d66a3d"
+                },
+                {
+                  "test": "datum.otp >= 60 && datum.otp < 70",
+                  "value": "#c9a227"
+                }
+              ],
+              "value": "#62c7d1"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 100,
+            "opacity": 1,
+            "stroke": "#071a2d",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "y": {
+              "field": "route",
+              "type": "nominal",
+              "sort": {
+                "field": "otp",
+                "order": "ascending"
+              }
+            },
+            "x": {
+              "field": "otp",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  50,
+                  80
+                ]
+              }
+            },
+            "color": {
+              "condition": [
+                {
+                  "test": "datum.otp < 60",
+                  "value": "#d66a3d"
+                },
+                {
+                  "test": "datum.otp >= 60 && datum.otp < 70",
+                  "value": "#c9a227"
+                }
+              ],
+              "value": "#62c7d1"
+            },
+            "tooltip": [
+              {
+                "field": "route",
+                "type": "nominal",
+                "title": "Route"
+              },
+              {
+                "field": "otp",
+                "type": "quantitative",
+                "title": "On-time rate (%)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 7,
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "color": "#f4f7fb"
+          },
+          "encoding": {
+            "y": {
+              "field": "route",
+              "type": "nominal",
+              "sort": {
+                "field": "otp",
+                "order": "ascending"
+              }
+            },
+            "x": {
+              "field": "otp",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  50,
+                  80
+                ]
+              }
+            },
+            "text": {
+              "condition": {
+                "test": "datum.route === 'Hamilton Island\u2013Sydney'",
+                "value": "Lowest: 55% on time"
+              },
+              "value": ""
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 7,
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "color": "#f4f7fb"
+          },
+          "encoding": {
+            "y": {
+              "field": "route",
+              "type": "nominal",
+              "sort": {
+                "field": "otp",
+                "order": "ascending"
+              }
+            },
+            "x": {
+              "field": "otp",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  50,
+                  80
+                ]
+              }
+            },
+            "text": {
+              "condition": {
+                "test": "datum.route === 'Hobart\u2013Brisbane'",
+                "value": "Highest: 68.5% on time"
+              },
+              "value": ""
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "y": "shared",
+      "x": "shared"
+    }
+  },
+  "config": {
+    "background": "#071a2d",
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, system-ui, sans-serif",
+    "axis": {
+      "domain": false,
+      "tickColor": "#4a6178",
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    },
+    "legend": {
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    }
+  },
+  "padding": {
+    "left": 20,
+    "right": 20,
+    "top": 20,
+    "bottom": 20
+  }
+}

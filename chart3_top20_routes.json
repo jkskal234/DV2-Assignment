@@ -1,0 +1,353 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "The Sydney\u2013Melbourne Route Carries Australia\u2019s Domestic Network",
+    "subtitle": "In 2024, the busiest domestic route carried almost double the passengers of the second-ranked route.",
+    "font": "DM Sans",
+    "fontSize": 20,
+    "fontWeight": "bold",
+    "color": "#f5f7fa",
+    "subtitleFont": "DM Sans",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#c8d8e8",
+    "anchor": "middle",
+    "offset": 14
+  },
+  "width": 760,
+  "height": 520,
+  "background": "#0d1b2e",
+  "padding": {
+    "left": 20,
+    "right": 80,
+    "top": 20,
+    "bottom": 20
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#d7e3f1",
+      "titleColor": "#f5f7fa",
+      "gridColor": "#24384f",
+      "domainColor": "#58708b",
+      "tickColor": "#58708b"
+    },
+    "legend": {
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#f5f7fa",
+      "titleColor": "#f5f7fa",
+      "symbolStrokeColor": "#f5f7fa"
+    }
+  },
+  "data": {
+    "values": [
+      {
+        "rank": 1,
+        "route": "Melbourne - Sydney",
+        "passengers": 8039295,
+        "category": "Interstate"
+      },
+      {
+        "rank": 2,
+        "route": "Brisbane - Sydney",
+        "passengers": 4358325,
+        "category": "Interstate"
+      },
+      {
+        "rank": 3,
+        "route": "Brisbane - Melbourne",
+        "passengers": 3499263,
+        "category": "Interstate"
+      },
+      {
+        "rank": 4,
+        "route": "Gold Coast - Sydney",
+        "passengers": 2538036,
+        "category": "Interstate"
+      },
+      {
+        "rank": 5,
+        "route": "Adelaide - Melbourne",
+        "passengers": 2331114,
+        "category": "Interstate"
+      },
+      {
+        "rank": 6,
+        "route": "Melbourne - Perth",
+        "passengers": 2030577,
+        "category": "Interstate"
+      },
+      {
+        "rank": 7,
+        "route": "Gold Coast - Melbourne",
+        "passengers": 2012806,
+        "category": "Interstate"
+      },
+      {
+        "rank": 8,
+        "route": "Adelaide - Sydney",
+        "passengers": 1883796,
+        "category": "Interstate"
+      },
+      {
+        "rank": 9,
+        "route": "Perth - Sydney",
+        "passengers": 1639356,
+        "category": "Interstate"
+      },
+      {
+        "rank": 10,
+        "route": "Hobart - Melbourne",
+        "passengers": 1373110,
+        "category": "Interstate"
+      },
+      {
+        "rank": 11,
+        "route": "Brisbane - Cairns",
+        "passengers": 1305477,
+        "category": "Intrastate"
+      },
+      {
+        "rank": 12,
+        "route": "Brisbane - Perth",
+        "passengers": 1090947,
+        "category": "Interstate"
+      },
+      {
+        "rank": 13,
+        "route": "Brisbane - Townsville",
+        "passengers": 940794,
+        "category": "Intrastate"
+      },
+      {
+        "rank": 14,
+        "route": "Cairns - Sydney",
+        "passengers": 919237,
+        "category": "Interstate"
+      },
+      {
+        "rank": 15,
+        "route": "Canberra - Melbourne",
+        "passengers": 917933,
+        "category": "Interstate"
+      },
+      {
+        "rank": 16,
+        "route": "Adelaide - Brisbane",
+        "passengers": 875326,
+        "category": "Interstate"
+      },
+      {
+        "rank": 17,
+        "route": "Cairns - Melbourne",
+        "passengers": 824781,
+        "category": "Interstate"
+      },
+      {
+        "rank": 18,
+        "route": "Hobart - Sydney",
+        "passengers": 804765,
+        "category": "Interstate"
+      },
+      {
+        "rank": 19,
+        "route": "Launceston - Melbourne",
+        "passengers": 787367,
+        "category": "Interstate"
+      },
+      {
+        "rank": 20,
+        "route": "Brisbane - Mackay",
+        "passengers": 761293,
+        "category": "Intrastate"
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "format(datum.rank, '02') + '. ' + datum.route",
+      "as": "rankedRoute"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "height": {
+          "band": 0.72
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "rankedRoute",
+          "type": "ordinal",
+          "sort": "ascending",
+          "axis": {
+            "title": null,
+            "labelFontSize": 11,
+            "labelColor": "#f5f7fa",
+            "labelExpr": "replace(datum.label, /^[0-9]+\\. /, '')"
+          }
+        },
+        "x": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              8500000
+            ]
+          },
+          "axis": {
+            "title": "Annual Passengers (2024)",
+            "format": "~s",
+            "values": [
+              0,
+              2000000,
+              4000000,
+              6000000,
+              8000000
+            ],
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Interstate",
+              "Intrastate"
+            ],
+            "range": [
+              "#5f86b3",
+              "#56c0b5"
+            ]
+          },
+          "legend": {
+            "title": "Route Type",
+            "orient": "right"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "rank",
+            "title": "Rank"
+          },
+          {
+            "field": "route",
+            "title": "Route"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers",
+            "format": ","
+          },
+          {
+            "field": "category",
+            "title": "Type"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "rankedRoute": "01. Melbourne - Sydney",
+            "labelX": 7850000,
+            "label": "8.0M \u2014 busiest route"
+          },
+          {
+            "rankedRoute": "02. Brisbane - Sydney",
+            "labelX": 4200000,
+            "label": "4.4M"
+          },
+          {
+            "rankedRoute": "03. Brisbane - Melbourne",
+            "labelX": 3350000,
+            "label": "3.5M"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -8,
+        "font": "DM Sans",
+        "fontSize": 11,
+        "color": "#f5f7fa",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "rankedRoute",
+          "type": "ordinal",
+          "sort": "ascending"
+        },
+        "x": {
+          "field": "labelX",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              8500000
+            ]
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "x": 5200000,
+            "rankedRoute": "04. Gold Coast - Sydney",
+            "label": "The top three routes are all major east-coast city pairs."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "font": "DM Sans",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#c8d8e8",
+        "limit": 330
+      },
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              8500000
+            ]
+          }
+        },
+        "y": {
+          "field": "rankedRoute",
+          "type": "ordinal",
+          "sort": "ascending"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

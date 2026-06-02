@@ -1,0 +1,414 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": {
+    "text": "Australia\u2019s Biggest Airports Are Not Always the Most On-Time",
+    "subtitle": "Passenger volume and punctuality do not move together: Melbourne and Brisbane dominate traffic, while Adelaide stands out for stronger on-time performance.",
+    "font": "DM Sans",
+    "fontSize": 20,
+    "fontWeight": "bold",
+    "color": "#f5f7fa",
+    "subtitleFont": "DM Sans",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#c8d8e8",
+    "anchor": "middle",
+    "offset": 14
+  },
+  "width": 860,
+  "height": 460,
+  "background": "#0d1b2e",
+  "padding": {
+    "left": 20,
+    "right": 120,
+    "top": 20,
+    "bottom": 20
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#d7e3f1",
+      "titleColor": "#f5f7fa",
+      "gridColor": "#24384f",
+      "gridOpacity": 0.5,
+      "domainColor": "#58708b",
+      "tickColor": "#58708b"
+    },
+    "legend": {
+      "labelFont": "DM Sans",
+      "titleFont": "DM Sans",
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#f5f7fa",
+      "titleColor": "#f5f7fa"
+    }
+  },
+  "data": {
+    "values": [
+      {
+        "airport": "Melbourne",
+        "passengers": 23954484,
+        "sectors_flown": 80753,
+        "otp_pct": 73.5,
+        "state": "VIC"
+      },
+      {
+        "airport": "Brisbane",
+        "passengers": 16606601,
+        "sectors_flown": 65528,
+        "otp_pct": 73.0,
+        "state": "QLD"
+      },
+      {
+        "airport": "Perth",
+        "passengers": 7957074,
+        "sectors_flown": 28010,
+        "otp_pct": 75.5,
+        "state": "WA"
+      },
+      {
+        "airport": "Adelaide",
+        "passengers": 6530861,
+        "sectors_flown": 26751,
+        "otp_pct": 79.4,
+        "state": "SA"
+      },
+      {
+        "airport": "Gold Coast",
+        "passengers": 5188318,
+        "sectors_flown": 15755,
+        "otp_pct": 71.9,
+        "state": "QLD"
+      },
+      {
+        "airport": "Cairns",
+        "passengers": 3049495,
+        "sectors_flown": 11837,
+        "otp_pct": 72.9,
+        "state": "QLD"
+      },
+      {
+        "airport": "Canberra",
+        "passengers": 2655833,
+        "sectors_flown": 16891,
+        "otp_pct": 77.1,
+        "state": "ACT"
+      },
+      {
+        "airport": "Hobart",
+        "passengers": 2484907,
+        "sectors_flown": 8778,
+        "otp_pct": 71.3,
+        "state": "TAS"
+      },
+      {
+        "airport": "Launceston",
+        "passengers": 1348142,
+        "sectors_flown": 5056,
+        "otp_pct": 67.0,
+        "state": "TAS"
+      },
+      {
+        "airport": "Townsville",
+        "passengers": 940794,
+        "sectors_flown": 5900,
+        "otp_pct": 77.2,
+        "state": "QLD"
+      },
+      {
+        "airport": "Darwin",
+        "passengers": 799024,
+        "sectors_flown": 2966,
+        "otp_pct": 59.9,
+        "state": "NT"
+      },
+      {
+        "airport": "Mackay",
+        "passengers": 761293,
+        "sectors_flown": 3532,
+        "otp_pct": 69.7,
+        "state": "QLD"
+      },
+      {
+        "airport": "Karratha",
+        "passengers": 608586,
+        "sectors_flown": 2626,
+        "otp_pct": 74.3,
+        "state": "WA"
+      },
+      {
+        "airport": "Rockhampton",
+        "passengers": 585008,
+        "sectors_flown": 3933,
+        "otp_pct": 70.5,
+        "state": "QLD"
+      },
+      {
+        "airport": "Port Hedland",
+        "passengers": 475259,
+        "sectors_flown": 2278,
+        "otp_pct": 68.0,
+        "state": "WA"
+      },
+      {
+        "airport": "Hamilton Island",
+        "passengers": 409187,
+        "sectors_flown": 1643,
+        "otp_pct": 61.2,
+        "state": "QLD"
+      },
+      {
+        "airport": "Newman",
+        "passengers": 396746,
+        "sectors_flown": 2017,
+        "otp_pct": 77.1,
+        "state": "WA"
+      },
+      {
+        "airport": "Broome",
+        "passengers": 355110,
+        "sectors_flown": 1514,
+        "otp_pct": 63.0,
+        "state": "WA"
+      },
+      {
+        "airport": "Proserpine",
+        "passengers": 277914,
+        "sectors_flown": 1006,
+        "otp_pct": 65.6,
+        "state": "Other"
+      },
+      {
+        "airport": "Gladstone",
+        "passengers": 224428,
+        "sectors_flown": 1936,
+        "otp_pct": 74.0,
+        "state": "QLD"
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "datum.state === 'VIC' ? 'VIC' : datum.state === 'QLD' ? 'QLD' : datum.state === 'WA' ? 'WA' : 'Other States'",
+      "as": "state_group"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "stroke": "#f5f7fa",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              26000000
+            ]
+          },
+          "axis": {
+            "title": "Annual Passengers (2024)",
+            "format": "~s",
+            "values": [
+              0,
+              5000000,
+              10000000,
+              15000000,
+              20000000,
+              25000000
+            ],
+            "grid": true
+          }
+        },
+        "y": {
+          "field": "otp_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              58,
+              82
+            ]
+          },
+          "axis": {
+            "title": "On-Time Departure Rate (%)",
+            "grid": true
+          }
+        },
+        "size": {
+          "field": "sectors_flown",
+          "type": "quantitative",
+          "scale": {
+            "range": [
+              60,
+              2200
+            ]
+          },
+          "legend": {
+            "title": "Sectors Flown",
+            "orient": "right",
+            "values": [
+              0,
+              20000,
+              40000,
+              60000,
+              80000
+            ]
+          }
+        },
+        "color": {
+          "field": "state_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "VIC",
+              "QLD",
+              "WA",
+              "Other States"
+            ],
+            "range": [
+              "#56c0b5",
+              "#e8b84b",
+              "#5f86b3",
+              "#9aa5b1"
+            ]
+          },
+          "legend": {
+            "title": "State Group",
+            "orient": "right"
+          }
+        },
+        "opacity": {
+          "value": 0.9
+        },
+        "tooltip": [
+          {
+            "field": "airport",
+            "title": "Airport"
+          },
+          {
+            "field": "passengers",
+            "title": "Passengers",
+            "format": ","
+          },
+          {
+            "field": "otp_pct",
+            "title": "On-Time %",
+            "format": ".1f"
+          },
+          {
+            "field": "sectors_flown",
+            "title": "Sectors Flown",
+            "format": ","
+          },
+          {
+            "field": "state",
+            "title": "State"
+          },
+          {
+            "field": "state_group",
+            "title": "State Group"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.passengers > 5000000"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "dx": 8,
+        "dy": -10,
+        "align": "left",
+        "color": "#f5f7fa"
+      },
+      "encoding": {
+        "x": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              26000000
+            ]
+          }
+        },
+        "y": {
+          "field": "otp_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              58,
+              82
+            ]
+          }
+        },
+        "text": {
+          "field": "airport"
+        },
+        "opacity": {
+          "value": 1
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "passengers": 12400000,
+            "otp_pct": 60.0,
+            "note": "Major hubs carry the most passengers, but higher traffic does not always mean stronger on-time performance."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontSize": 12,
+        "fontStyle": "italic",
+        "color": "#c8d8e8",
+        "align": "left",
+        "limit": 420
+      },
+      "encoding": {
+        "x": {
+          "field": "passengers",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              26000000
+            ]
+          }
+        },
+        "y": {
+          "field": "otp_pct",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              58,
+              82
+            ]
+          }
+        },
+        "text": {
+          "field": "note"
+        }
+      }
+    }
+  ]
+}

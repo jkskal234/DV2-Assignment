@@ -1,0 +1,539 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 11 \u2014 Grouped bar chart showing average airport punctuality by state and traffic tier",
+  "title": {
+    "text": "Airport Size Does Not Guarantee Better Punctuality",
+    "subtitle": "Average on-time departure rate by state and airport traffic tier in 2024. Tiers are based on aircraft sectors flown.",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#666666",
+    "anchor": "start",
+    "offset": 12
+  },
+  "width": 900,
+  "height": 500,
+  "data": {
+    "values": [
+      {
+        "airport": "Sydney",
+        "otp": 75.68,
+        "sectors": 90166,
+        "state": "NSW"
+      },
+      {
+        "airport": "Melbourne",
+        "otp": 73.47,
+        "sectors": 80753,
+        "state": "VIC"
+      },
+      {
+        "airport": "Brisbane",
+        "otp": 72.97,
+        "sectors": 65528,
+        "state": "QLD"
+      },
+      {
+        "airport": "Perth",
+        "otp": 75.48,
+        "sectors": 28010,
+        "state": "WA"
+      },
+      {
+        "airport": "Adelaide",
+        "otp": 79.36,
+        "sectors": 26751,
+        "state": "SA"
+      },
+      {
+        "airport": "Canberra",
+        "otp": 77.06,
+        "sectors": 16891,
+        "state": "ACT"
+      },
+      {
+        "airport": "Gold Coast",
+        "otp": 71.93,
+        "sectors": 15755,
+        "state": "QLD"
+      },
+      {
+        "airport": "Cairns",
+        "otp": 72.92,
+        "sectors": 11837,
+        "state": "QLD"
+      },
+      {
+        "airport": "Hobart",
+        "otp": 71.25,
+        "sectors": 8778,
+        "state": "TAS"
+      },
+      {
+        "airport": "Townsville",
+        "otp": 77.2,
+        "sectors": 5900,
+        "state": "QLD"
+      },
+      {
+        "airport": "Launceston",
+        "otp": 66.98,
+        "sectors": 5056,
+        "state": "TAS"
+      },
+      {
+        "airport": "Sunshine Coast",
+        "otp": 68.83,
+        "sectors": 4786,
+        "state": "QLD"
+      },
+      {
+        "airport": "Newcastle",
+        "otp": 73.82,
+        "sectors": 4460,
+        "state": "NSW"
+      },
+      {
+        "airport": "Rockhampton",
+        "otp": 70.48,
+        "sectors": 3933,
+        "state": "QLD"
+      },
+      {
+        "airport": "Mackay",
+        "otp": 69.68,
+        "sectors": 3532,
+        "state": "QLD"
+      },
+      {
+        "airport": "Port Lincoln",
+        "otp": 86.91,
+        "sectors": 3285,
+        "state": "SA"
+      },
+      {
+        "airport": "Darwin",
+        "otp": 59.86,
+        "sectors": 2966,
+        "state": "NT"
+      },
+      {
+        "airport": "Dubbo",
+        "otp": 76.93,
+        "sectors": 2631,
+        "state": "NSW"
+      },
+      {
+        "airport": "Karratha",
+        "otp": 74.33,
+        "sectors": 2626,
+        "state": "WA"
+      },
+      {
+        "airport": "Mildura",
+        "otp": 70.46,
+        "sectors": 2393,
+        "state": "VIC"
+      },
+      {
+        "airport": "Wagga Wagga",
+        "otp": 82.96,
+        "sectors": 2247,
+        "state": "NSW"
+      },
+      {
+        "airport": "Port Hedland",
+        "otp": 67.95,
+        "sectors": 2278,
+        "state": "WA"
+      },
+      {
+        "airport": "Newman",
+        "otp": 77.14,
+        "sectors": 2017,
+        "state": "WA"
+      },
+      {
+        "airport": "Kalgoorlie",
+        "otp": 71.64,
+        "sectors": 2066,
+        "state": "WA"
+      },
+      {
+        "airport": "Albury",
+        "otp": 77.59,
+        "sectors": 2111,
+        "state": "NSW"
+      },
+      {
+        "airport": "Ballina",
+        "otp": 77.88,
+        "sectors": 2066,
+        "state": "NSW"
+      },
+      {
+        "airport": "Coffs Harbour",
+        "otp": 75.8,
+        "sectors": 2335,
+        "state": "NSW"
+      },
+      {
+        "airport": "Port Macquarie",
+        "otp": 78.65,
+        "sectors": 2005,
+        "state": "NSW"
+      },
+      {
+        "airport": "Devonport",
+        "otp": 80.29,
+        "sectors": 1847,
+        "state": "TAS"
+      },
+      {
+        "airport": "Emerald",
+        "otp": 80.51,
+        "sectors": 1734,
+        "state": "QLD"
+      },
+      {
+        "airport": "Gladstone",
+        "otp": 74.02,
+        "sectors": 1936,
+        "state": "QLD"
+      },
+      {
+        "airport": "Broome",
+        "otp": 63.01,
+        "sectors": 1514,
+        "state": "WA"
+      },
+      {
+        "airport": "Hamilton Island",
+        "otp": 61.2,
+        "sectors": 1643,
+        "state": "QLD"
+      },
+      {
+        "airport": "Proserpine",
+        "otp": 65.61,
+        "sectors": 1006,
+        "state": "QLD"
+      },
+      {
+        "airport": "Alice Springs",
+        "otp": 76.5,
+        "sectors": 702,
+        "state": "NT"
+      },
+      {
+        "airport": "Mount Isa",
+        "otp": 74.67,
+        "sectors": 833,
+        "state": "QLD"
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "datum.sectors >= 50000 ? 'Major' : datum.sectors >= 10000 ? 'Large' : datum.sectors >= 3000 ? 'Medium' : 'Small'",
+      "as": "traffic_tier"
+    },
+    {
+      "calculate": "datum.traffic_tier == 'Major' ? 'Major: 50k+ sectors' : datum.traffic_tier == 'Large' ? 'Large: 10k\u201349k sectors' : datum.traffic_tier == 'Medium' ? 'Medium: 3k\u20139.9k sectors' : 'Small: under 3k sectors'",
+      "as": "tier_description"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "mean",
+          "field": "otp",
+          "as": "avg_otp"
+        },
+        {
+          "op": "count",
+          "field": "airport",
+          "as": "airport_count"
+        },
+        {
+          "op": "sum",
+          "field": "sectors",
+          "as": "total_sectors"
+        }
+      ],
+      "groupby": [
+        "state",
+        "traffic_tier",
+        "tier_description"
+      ]
+    },
+    {
+      "calculate": "format(datum.avg_otp, '.2f') + '%'",
+      "as": "otp_label"
+    },
+    {
+      "calculate": "55 + (datum.avg_otp - 55) / 2",
+      "as": "label_y"
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "avg": 75.4
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "color": "#6b7280",
+        "size": 1.4
+      },
+      "encoding": {
+        "y": {
+          "field": "avg",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              55,
+              92
+            ]
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "avg": 75.4,
+            "label": "National average: 75.4%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "dy": -8,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#6b7280"
+      },
+      "encoding": {
+        "x": {
+          "value": 540
+        },
+        "y": {
+          "field": "avg",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              55,
+              92
+            ]
+          }
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3,
+        "opacity": 0.92
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State / Territory",
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ],
+          "axis": {
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "labelAngle": 0,
+            "labelPadding": 6
+          }
+        },
+        "xOffset": {
+          "field": "traffic_tier",
+          "sort": [
+            "Major",
+            "Large",
+            "Medium",
+            "Small"
+          ]
+        },
+        "y": {
+          "field": "avg_otp",
+          "type": "quantitative",
+          "title": "Average On-Time Departure Rate (%)",
+          "scale": {
+            "domain": [
+              55,
+              92
+            ]
+          },
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "grid": true,
+            "gridColor": "#eeeeee"
+          }
+        },
+        "y2": {
+          "datum": 55
+        },
+        "color": {
+          "field": "traffic_tier",
+          "type": "nominal",
+          "title": "Traffic Tier",
+          "scale": {
+            "domain": [
+              "Major",
+              "Large",
+              "Medium",
+              "Small"
+            ],
+            "range": [
+              "#0f172a",
+              "#2563eb",
+              "#14b8a6",
+              "#f59e0b"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 12,
+            "labelFontSize": 11,
+            "symbolSize": 120,
+            "labelLimit": 160
+          }
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State / Territory"
+          },
+          {
+            "field": "tier_description",
+            "type": "nominal",
+            "title": "Traffic Tier"
+          },
+          {
+            "field": "avg_otp",
+            "type": "quantitative",
+            "title": "Average On-Time Rate (%)",
+            "format": ".2f"
+          },
+          {
+            "field": "airport_count",
+            "type": "quantitative",
+            "title": "Number of Airports"
+          },
+          {
+            "field": "total_sectors",
+            "type": "quantitative",
+            "title": "Total Sectors Flown",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "angle": 270,
+        "baseline": "middle",
+        "align": "center",
+        "fontSize": 9,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "x": {
+          "field": "state",
+          "type": "nominal",
+          "sort": [
+            "NSW",
+            "VIC",
+            "QLD",
+            "WA",
+            "SA",
+            "TAS",
+            "NT",
+            "ACT"
+          ]
+        },
+        "xOffset": {
+          "field": "traffic_tier",
+          "sort": [
+            "Major",
+            "Large",
+            "Medium",
+            "Small"
+          ]
+        },
+        "y": {
+          "field": "label_y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              55,
+              92
+            ]
+          }
+        },
+        "text": {
+          "field": "otp_label"
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.traffic_tier == 'Small'",
+              "value": "#111827"
+            },
+            {
+              "test": "datum.traffic_tier == 'Medium'",
+              "value": "#0f172a"
+            }
+          ],
+          "value": "white"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "white",
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, system-ui, sans-serif",
+    "axis": {
+      "domain": false,
+      "tickSize": 0
+    }
+  },
+  "padding": {
+    "left": 20,
+    "right": 120,
+    "top": 20,
+    "bottom": 20
+  }
+}

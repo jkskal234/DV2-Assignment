@@ -1,0 +1,357 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 10 \u2014 Diverging bar: domestic route passenger recovery, 2019 vs 2024",
+  "title": {
+    "text": "Which Routes Recovered Beyond 2019 Levels?",
+    "subtitle": "Passenger recovery by route in 2024 compared with 2019. Positive values exceeded pre-disruption levels; negative values remained below.",
+    "fontSize": 20,
+    "fontWeight": "bold",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#c9d6e3",
+    "color": "#f4f7fb",
+    "anchor": "start",
+    "offset": 12
+  },
+  "width": 860,
+  "height": 460,
+  "data": {
+    "values": [
+      {
+        "name": "Armidale \u2013 Sydney",
+        "pax_2019": 124966,
+        "pax_2024": 0,
+        "recovery": -100.0,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Ayers Rock \u2013 Melbourne",
+        "pax_2019": 196164,
+        "pax_2024": 29577,
+        "recovery": -84.9,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Sydney \u2013 Tamworth",
+        "pax_2019": 528447,
+        "pax_2024": 159909,
+        "recovery": -69.7,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Darwin \u2013 Melbourne",
+        "pax_2019": 794591,
+        "pax_2024": 471773,
+        "recovery": -40.6,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Coffs Harbour \u2013 Sydney",
+        "pax_2019": 326518,
+        "pax_2024": 208103,
+        "recovery": -36.3,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Albury \u2013 Sydney",
+        "pax_2019": 230149,
+        "pax_2024": 161310,
+        "recovery": -29.9,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Cairns \u2013 Melbourne",
+        "pax_2019": 2077169,
+        "pax_2024": 1744018,
+        "recovery": -16.0,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Canberra \u2013 Melbourne",
+        "pax_2019": 2116124,
+        "pax_2024": 1831430,
+        "recovery": -13.5,
+        "status": "Below 2019"
+      },
+      {
+        "name": "Perth \u2013 Port Hedland",
+        "pax_2019": 2417964,
+        "pax_2024": 2511361,
+        "recovery": 3.9,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Hamilton Island \u2013 Melbourne",
+        "pax_2019": 229627,
+        "pax_2024": 246927,
+        "recovery": 7.5,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Broome \u2013 Perth",
+        "pax_2019": 328804,
+        "pax_2024": 355110,
+        "recovery": 8.0,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Ballina \u2013 Sydney",
+        "pax_2019": 433277,
+        "pax_2024": 523183,
+        "recovery": 20.8,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Melbourne \u2013 Sunshine Coast",
+        "pax_2019": 1222981,
+        "pax_2024": 1520392,
+        "recovery": 24.3,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Karratha \u2013 Perth",
+        "pax_2019": 466223,
+        "pax_2024": 608586,
+        "recovery": 30.5,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Kalgoorlie \u2013 Perth",
+        "pax_2019": 278212,
+        "pax_2024": 366931,
+        "recovery": 31.9,
+        "status": "Above 2019"
+      },
+      {
+        "name": "Geraldton \u2013 Perth",
+        "pax_2019": 61557,
+        "pax_2024": 113284,
+        "recovery": 84.0,
+        "status": "Above 2019"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#8fb7d9",
+        "size": 2
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "zero": 0,
+            "label": "2019 level"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 6,
+        "dy": 2,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#d9e2ec"
+      },
+      "encoding": {
+        "x": {
+          "field": "zero",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 0
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopRight": 3,
+        "cornerRadiusBottomRight": 3,
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusBottomLeft": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "name",
+          "type": "nominal",
+          "sort": {
+            "field": "recovery",
+            "order": "ascending"
+          },
+          "title": null,
+          "axis": {
+            "labelFontSize": 11,
+            "labelColor": "#f4f7fb"
+          }
+        },
+        "x": {
+          "field": "recovery",
+          "type": "quantitative",
+          "title": "Change in passengers from 2019 to 2024 (%)",
+          "scale": {
+            "domain": [
+              -110,
+              100
+            ]
+          },
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 12,
+            "titleColor": "#f4f7fb",
+            "labelColor": "#d9e2ec",
+            "grid": true,
+            "gridColor": "#28425b",
+            "format": "+.0f"
+          }
+        },
+        "color": {
+          "field": "status",
+          "type": "nominal",
+          "title": "Status",
+          "scale": {
+            "domain": [
+              "Above 2019",
+              "Below 2019"
+            ],
+            "range": [
+              "#62c7d1",
+              "#d66a3d"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "direction": "vertical",
+            "titleFontSize": 12,
+            "labelFontSize": 12,
+            "titleColor": "#f4f7fb",
+            "labelColor": "#d9e2ec",
+            "symbolType": "square",
+            "offset": 15
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Route"
+          },
+          {
+            "field": "pax_2019",
+            "type": "quantitative",
+            "title": "2019 Passengers",
+            "format": ","
+          },
+          {
+            "field": "pax_2024",
+            "type": "quantitative",
+            "title": "2024 Passengers",
+            "format": ","
+          },
+          {
+            "field": "recovery",
+            "type": "quantitative",
+            "title": "Change (%)",
+            "format": "+.1f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#7ee0c8"
+      },
+      "encoding": {
+        "y": {
+          "field": "name",
+          "type": "nominal",
+          "sort": {
+            "field": "recovery",
+            "order": "ascending"
+          }
+        },
+        "x": {
+          "field": "recovery",
+          "type": "quantitative"
+        },
+        "text": {
+          "condition": {
+            "test": "datum.name === 'Geraldton \u2013 Perth'",
+            "value": "+84% \u2014 biggest recovery"
+          },
+          "value": ""
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#f0c05a"
+      },
+      "encoding": {
+        "y": {
+          "field": "name",
+          "type": "nominal",
+          "sort": {
+            "field": "recovery",
+            "order": "ascending"
+          }
+        },
+        "x": {
+          "datum": -98
+        },
+        "text": {
+          "condition": {
+            "test": "datum.name === 'Armidale \u2013 Sydney'",
+            "value": "\u2212100% \u2014 no 2024 passengers recorded"
+          },
+          "value": ""
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "#071a2d",
+    "view": {
+      "stroke": null
+    },
+    "font": "Inter, system-ui, sans-serif",
+    "axis": {
+      "domain": false,
+      "tickColor": "#4a6178",
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    },
+    "legend": {
+      "labelColor": "#d9e2ec",
+      "titleColor": "#f4f7fb"
+    }
+  },
+  "padding": {
+    "left": 20,
+    "right": 120,
+    "top": 20,
+    "bottom": 20
+  }
+}
